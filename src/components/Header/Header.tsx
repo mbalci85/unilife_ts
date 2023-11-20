@@ -4,8 +4,10 @@ import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 import { FavoriteBorder, MailOutline } from '@mui/icons-material';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
+import { useNavigate } from 'react-router-dom';
 const Header = () => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
+	const navigate = useNavigate();
 
 	return (
 		<AppBar
@@ -19,7 +21,11 @@ const Header = () => {
 				backgroundColor: '#00A2E1',
 			}}>
 			<Box>
-				<IconButton sx={{ color: 'white' }}>
+				<IconButton
+					sx={{ color: 'white' }}
+					onClick={() => {
+						navigate('/');
+					}}>
 					<HolidayVillageIcon sx={{ marginRight: '0.3rem' }} />
 					<Typography>UniLife</Typography>
 				</IconButton>

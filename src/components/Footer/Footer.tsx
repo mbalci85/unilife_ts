@@ -17,11 +17,25 @@ const Footer = () => {
 				padding: '0.3rem 0.7rem',
 			}}>
 			<Box sx={{ display: 'flex', flexDirection: isSmallScreen ? 'column' : 'row' }}>
-				<Typography sx={{ marginRight: isSmallScreen ? null : '1.25rem' }}>About Us</Typography>
-				<Typography sx={{ marginRight: isSmallScreen ? null : '1.25rem' }}>Terms & Conditions</Typography>
-				<Typography>Privacy & Cookie Policies</Typography>
+				<Typography
+					variant={isSmallScreen ? 'body2' : 'body1'}
+					sx={{ margin: isSmallScreen ? '0.4rem 0 0.4rem 0' : '0 1.25rem 0 0' }}>
+					About Us
+				</Typography>
+				<Typography
+					variant={isSmallScreen ? 'body2' : 'body1'}
+					sx={{ margin: isSmallScreen ? '0 0 0.4rem 0' : '0 1.25rem 0 0 ' }}>
+					Terms & Conditions
+				</Typography>
+				<Typography
+					variant={isSmallScreen ? 'body2' : 'body1'}
+					sx={{ margin: isSmallScreen ? '0 0 0.4rem 0' : null }}>
+					Privacy & Cookie Policies
+				</Typography>
 			</Box>
-			<Box>2023 @ UniLife</Box>
+			<Box>
+				<Typography variant={isSmallScreen ? 'body2' : 'body1'}>2023@UniLife</Typography>
+			</Box>
 		</Box>
 	);
 };

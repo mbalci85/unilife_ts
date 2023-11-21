@@ -1,7 +1,18 @@
 import { Box, Typography } from '@mui/material';
 import backgroundImage from '../../assets/cover-img.png';
+import { useContext } from 'react';
+import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
+import SearchByCity from '../forms/SearchByCity';
 
-const Slider = () => {
+interface SliderTextProps {
+	sliderText: {
+		title: string;
+		subtitle: string;
+	};
+}
+
+const Slider = ({ sliderText }: SliderTextProps) => {
+	const { isSmallScreen } = useContext(MediaQueryContext);
 	return (
 		<Box
 			sx={{
@@ -13,7 +24,7 @@ const Slider = () => {
 				backgroundSize: 'cover',
 				backgroundPosition: 'center center',
 				color: 'white',
-				paddingTop: '5rem',
+				paddingTop: isSmallScreen ? '3rem' : '5rem',
 			}}>
 			<Box
 				sx={{
@@ -25,10 +36,13 @@ const Slider = () => {
 					backgroundColor: 'rgba(0,0,0,0.5)',
 				}}></Box>
 			<Box sx={{ position: 'absolute', textAlign: 'center' }}>
-				<Typography variant='h4' sx={{ marginBottom: '1rem' }}>
-					Find student homes with bills included
+				<Typography variant={isSmallScreen ? 'h5' : 'h4'} sx={{ marginBottom: '1rem' }}>
+					{sliderText.title}
 				</Typography>
-				<Typography variant='h6'>A simple and faster way to search for student accommodation</Typography>
+				<Typography variant={isSmallScreen ? 'body1' : 'h6'}>{sliderText.subtitle}</Typography>
+			</Box>
+			<Box sx={{ position: 'absolute', bottom: -70 }}>
+				<SearchByCity />
 			</Box>
 		</Box>
 	);

@@ -8,21 +8,24 @@ import Footer from './components/Footer/Footer';
 import AllCities from './pages/All Cities/AllCities';
 import CityDetails from './pages/City Details/CityDetails';
 import HomeDetail from './pages/Home Detail/HomeDetail';
+import AllCitiesContextProvider from './contexts/AllCitiesContextProvider';
 
 function App() {
 	return (
 		<Box>
 			<MediaQueryContextProvider>
-				<Router>
-					<Header />
-					<Routes>
-						<Route path='/' element={<HomePage />} />
-						<Route path='/all_cities' element={<AllCities />} />
-						<Route path='/city/:name' element={<CityDetails />} />
-						<Route path='/home/:id' element={<HomeDetail />} />
-					</Routes>
-					<Footer />
-				</Router>
+				<AllCitiesContextProvider>
+					<Router>
+						<Header />
+						<Routes>
+							<Route path='/' element={<HomePage />} />
+							<Route path='/all_cities' element={<AllCities />} />
+							<Route path='/city/:name' element={<CityDetails />} />
+							<Route path='/home/:id' element={<HomeDetail />} />
+						</Routes>
+						<Footer />
+					</Router>
+				</AllCitiesContextProvider>
 			</MediaQueryContextProvider>
 		</Box>
 	);

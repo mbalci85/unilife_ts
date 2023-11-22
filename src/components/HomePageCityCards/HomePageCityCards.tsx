@@ -6,7 +6,7 @@ import HomePageCityCard from '../HomePageCityCard/HomePageCityCard';
 const HomePageCityCards = () => {
 	const { allCities } = useContext(AllCitiesContext);
 	return (
-		<Box sx={{ marginTop: '5.5rem' }}>
+		<Box sx={{ margin: '6rem 0 1rem 0' }}>
 			<Typography sx={{ textAlign: 'center' }}>Student accommodations in our top cities</Typography>
 			<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 				{allCities.map((city, index) => (

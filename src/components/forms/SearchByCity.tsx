@@ -27,11 +27,18 @@ const SearchByCity = () => {
 					alignItems: 'center',
 				}}>
 				<FormControl fullWidth>
-					<InputLabel id='select-city'>Search by City</InputLabel>
+					<InputLabel
+						id='select-city'
+						sx={{
+							lineHeight: '1', // Adjusted lineHeight for vertical centering
+						}}>
+						Search by City
+					</InputLabel>
 					<Select
 						id='select-city'
 						label='Search by City'
 						value={selectedCity}
+						size='small'
 						sx={{ marginBottom: '0.75rem' }}
 						onChange={(e) => setSelectedCity(e.target.value)}>
 						{allCityNames.map((city) => (

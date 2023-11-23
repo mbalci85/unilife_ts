@@ -8,7 +8,7 @@ import KeepInTouch from '../../components/KeepInTouch/KeepInTouch';
 import HomePageFeatures from '../../components/HomePageFeatures/HomePageFeatures';
 
 const HomePage = () => {
-	const { isSmallScreen } = useContext(MediaQueryContext);
+	const { isSmallScreen, isMediumScreen } = useContext(MediaQueryContext);
 	const navigate = useNavigate();
 
 	const sliderText = {
@@ -39,9 +39,17 @@ const HomePage = () => {
 				</Button>
 			</Box>
 			<HomePageFeatures />
-			<Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
-				<Button sx={btnStyle}>Search & Compare</Button>
-			</Box>
+			{isMediumScreen ? (
+				<Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+					<Button
+						sx={btnStyle}
+						onClick={() => {
+							window.scrollTo({ top: 0, behavior: 'smooth' });
+						}}>
+						Search & Compare
+					</Button>
+				</Box>
+			) : null}
 			<KeepInTouch />
 		</Box>
 	);

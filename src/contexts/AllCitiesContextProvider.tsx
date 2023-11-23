@@ -28,19 +28,13 @@ const AllCitiesContextProvider = (props: AllCitiesContextProviderProps) => {
 
 			const response = await axios.get(`${allCitiesBaseUrl}?limit=${totalNumberOfCities}`);
 
-			const sortedCities: Cities = response.data.response.sort((a: City, b: City) =>
-				a.name.localeCompare(b.name)
-			);
+			setAllCities(response.data.response);
 
-			setAllCities(sortedCities);
-
-			const cityNamesSorted: string[] = response.data.response
-				.reduce((acc: string[], item: City) => {
-					acc.push(item.name);
-					return acc;
-				}, [])
-				.sort();
-			setAllCityNames(cityNamesSorted);
+			const cityNames: string[] = response.data.response.reduce((acc: string[], item: City) => {
+				acc.push(item.name);
+				return acc;
+			}, []);
+			setAllCityNames(cityNames);
 		};
 		fetchCities();
 	}, []);

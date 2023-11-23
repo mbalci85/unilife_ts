@@ -2,6 +2,7 @@ import { FacebookOutlined, Instagram, Twitter } from '@mui/icons-material';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useContext, useState } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
+import axios from 'axios';
 
 const KeepInTouch = () => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
@@ -17,7 +18,6 @@ const KeepInTouch = () => {
 				backgroundColor: 'rgba(0, 162, 225, 1)',
 				color: 'white',
 				padding: '1rem 2rem',
-				marginTop: '1rem',
 			}}>
 			<Box sx={{ marginBottom: '2rem', width: isSmallScreen ? '100%' : '70%' }}>
 				<Typography variant='h6' sx={{ marginBottom: '1rem' }}>
@@ -27,10 +27,21 @@ const KeepInTouch = () => {
 					Curious about new offerings? Sign up for our weekly newsletter and stay informed.
 				</Typography>
 				<form
-					onSubmit={(e) => {
+					onSubmit={async (e) => {
 						e.preventDefault();
-						setIsSubscribed(true);
-						setSubscriptionEmail('');
+
+						await axios
+							.post('https://unilife-server.herokuapp.com/subscriptions', {
+								email: subscriptionEmail,
+							})
+							.then((response) => {
+								setIsSubscribed(true);
+								setSubscriptionEmail('');
+								console.log(response);
+							})
+							.catch((err) => {
+								console.log(err);
+							});
 					}}>
 					<input
 						type='email'

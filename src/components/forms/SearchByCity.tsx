@@ -48,7 +48,7 @@ const SearchByCity = () => {
 								width: isSmallScreen ? '100%' : '70%',
 							}}
 							onChange={(e) => setSelectedCity(e.target.value)}>
-							{allCityNames.map((city) => (
+							{allCityNames.sort().map((city) => (
 								<MenuItem value={city} key={city}>
 									{city}
 								</MenuItem>

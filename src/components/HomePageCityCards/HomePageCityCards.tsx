@@ -9,7 +9,7 @@ const HomePageCityCards = () => {
 		<Box sx={{ margin: '6rem 0 1rem 0' }}>
 			<Typography sx={{ textAlign: 'center' }}>Student accommodations in our top cities</Typography>
 			<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-				{allCities.map((city, index) => (
+				{allCities.slice(0, 9).map((city, index) => (
 					<HomePageCityCard key={city.id || index} city={city} />
 				))}
 			</Box>

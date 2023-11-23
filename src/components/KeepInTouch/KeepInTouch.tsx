@@ -13,12 +13,13 @@ const KeepInTouch = () => {
 			sx={{
 				display: 'flex',
 				flexDirection: isSmallScreen ? 'column' : 'row',
+				justifyContent: isSmallScreen ? null : 'center',
 				backgroundColor: 'rgba(0, 162, 225, 1)',
 				color: 'white',
 				padding: '1rem 2rem',
 				marginTop: '1rem',
 			}}>
-			<Box sx={{ marginBottom: '2rem' }}>
+			<Box sx={{ marginBottom: '2rem', width: isSmallScreen ? '100%' : '70%' }}>
 				<Typography variant='h6' sx={{ marginBottom: '1rem' }}>
 					Keep in touch
 				</Typography>
@@ -35,7 +36,7 @@ const KeepInTouch = () => {
 						type='email'
 						placeholder='Your Email'
 						style={{
-							width: '80%',
+							width: isSmallScreen ? '80%' : '50%',
 							height: '2rem',
 							border: 'none',
 							borderRadius: '0.3rem',

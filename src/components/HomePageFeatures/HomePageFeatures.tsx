@@ -9,6 +9,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { useContext } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import Img from '../../assets/Feature Pic.png';
+import { HomePageCommonFeatures } from '../../utils/HomePageFeatureUtils';
 
 const HomePageFeatures = () => {
 	const { isSmallScreen, isMediumScreen } = useContext(MediaQueryContext);
@@ -24,56 +25,22 @@ const HomePageFeatures = () => {
 					justifyContent: 'center',
 					alignItems: 'center',
 				}}>
-				<Box
-					sx={{
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'center',
-						alignItems: 'center',
-						width: '70%',
-						margin: '1rem 2rem 2rem 1rem',
-						textAlign: 'center',
-					}}>
-					<TravelExploreOutlined sx={{ color: '#3A5295', fontSize: '4rem' }} />
-					<Typography variant='h6'>Search</Typography>
-					<Typography variant='body1' sx={{ textAlign: 'center', color: 'gray' }}>
-						Find your dream home in the perfect area near your university.
-					</Typography>
-				</Box>
-				<Box
-					sx={{
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'center',
-						alignItems: 'center',
-						width: '70%',
-						margin: '1rem 2rem 2rem 1rem',
-						textAlign: 'center',
-					}}>
-					<Rule fontSize='large' sx={{ color: '#3A5295', fontSize: '4rem' }} />
-					<Typography variant='h6'>Compare</Typography>
-					<Typography variant='body1' sx={{ textAlign: 'center', color: 'gray' }}>
-						Compare student accommodation to find the right home for you.
-					</Typography>
-				</Box>
-				<Box
-					sx={{
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'center',
-						alignItems: 'center',
-						width: '70%',
-						margin: '1rem 2rem 2rem 1rem',
-						textAlign: 'center',
-					}}>
-					<ReceiptLongOutlined fontSize='large' sx={{ color: '#3A5295', fontSize: '4rem' }} />
-					<Typography variant='h6' sx={{ textAlign: 'center' }}>
-						Bills Included
-					</Typography>
-					<Typography variant='body1' sx={{ textAlign: 'center', color: 'gray' }}>
-						Bills are included in all rent prices. No hidden fees.
-					</Typography>
-				</Box>
+				{HomePageCommonFeatures.homePageCommonFeatureGenerator(
+					TravelExploreOutlined,
+					'Search',
+					'Find your dream home in the perfect area near your university.'
+				)}
+				{HomePageCommonFeatures.homePageCommonFeatureGenerator(
+					Rule,
+					'Compare',
+					'Compare student accommodation to find the right home for you.'
+				)}
+
+				{HomePageCommonFeatures.homePageCommonFeatureGenerator(
+					ReceiptLongOutlined,
+					'Bills Included',
+					'Bills are included in all rent prices. No hidden fees.'
+				)}
 			</Box>
 			{!isMediumScreen ? (
 				<Box sx={{ display: 'flex', margin: '3rem 2rem 0 2rem' }}>

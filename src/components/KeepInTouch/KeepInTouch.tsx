@@ -1,21 +1,15 @@
 import { Facebook, Instagram, Twitter } from '@mui/icons-material';
-import { Box, IconButton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useContext, useState } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import axios from 'axios';
 import * as styles from '../../styles/KeepInTouchStyles';
+import { IconButtonUtils } from '../../utils/IconButtonUtils';
 
 const KeepInTouch = () => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
 	const [subscriptionEmail, setSubscriptionEmail] = useState<string>('');
 	const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
-
-	const socialMediaIconGenerator = (AppName: React.ElementType, app: string): JSX.Element => (
-		<IconButton sx={{ color: 'white' }}>
-			<AppName sx={{ marginRight: '0.3rem' }} />
-			<Typography variant='body2'>{app}</Typography>
-		</IconButton>
-	);
 
 	return (
 		<Box sx={styles.KeepInTouchContainerStyles(isSmallScreen)}>
@@ -63,9 +57,9 @@ const KeepInTouch = () => {
 			</Box>
 			<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
 				<Typography variant='h6'>Let's Socialize</Typography>
-				{socialMediaIconGenerator(Facebook, 'Facebook')}
-				{socialMediaIconGenerator(Twitter, 'Twitter')}
-				{socialMediaIconGenerator(Instagram, 'Instagram')}
+				{IconButtonUtils.iconButtonGenerator(Facebook, 'Facebook')}
+				{IconButtonUtils.iconButtonGenerator(Twitter, 'Twitter')}
+				{IconButtonUtils.iconButtonGenerator(Instagram, 'Instagram')}
 			</Box>
 		</Box>
 	);

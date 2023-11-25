@@ -3,6 +3,7 @@ import backgroundImage from '../../assets/cover-img.png';
 import { useContext } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import SearchByCity from '../forms/SearchByCity';
+import * as styles from '../../styles/SliderStyles';
 
 interface SliderTextProps {
 	sliderText: {
@@ -14,27 +15,8 @@ interface SliderTextProps {
 const Slider = ({ sliderText }: SliderTextProps) => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
 	return (
-		<Box
-			sx={{
-				position: 'relative',
-				display: 'flex',
-				justifyContent: 'center',
-				height: '15rem',
-				backgroundImage: `url(${backgroundImage})`,
-				backgroundSize: 'cover',
-				backgroundPosition: 'center center',
-				color: 'white',
-				paddingTop: isSmallScreen ? '2rem' : '5rem',
-			}}>
-			<Box
-				sx={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					width: '100%',
-					height: '100%',
-					backgroundColor: 'rgba(0,0,0,0.5)',
-				}}></Box>
+		<Box sx={styles.SliderContainerStyles(backgroundImage, isSmallScreen)}>
+			<Box sx={styles.SliderOverlayStyles()}></Box>
 			<Box sx={{ position: 'absolute', textAlign: 'center' }}>
 				<Typography variant={isSmallScreen ? 'h5' : 'h4'} sx={{ marginBottom: '1rem' }}>
 					{sliderText.title}
@@ -44,7 +26,7 @@ const Slider = ({ sliderText }: SliderTextProps) => {
 			<Box
 				sx={{
 					position: 'absolute',
-					bottom: '-4rem',
+					bottom: '-3rem',
 				}}>
 				<SearchByCity />
 			</Box>

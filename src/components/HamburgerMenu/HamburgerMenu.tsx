@@ -9,26 +9,23 @@ const HamburgerMenu = () => {
 	const toggleDrawer = (): void => {
 		setIsMenuOpen(!isMenuOpen);
 	};
+
+	const drawerListItemGenerator = (ItemIcon: React.ElementType, listItemText: string) => (
+		<ListItem>
+			<ListItemButton>
+				<ListItemIcon sx={{ display: 'flex', alignItems: 'center' }}>
+					<ItemIcon sx={{ marginRight: '0.3rem' }} />
+					<ListItemText primary={listItemText} />
+				</ListItemIcon>
+			</ListItemButton>
+		</ListItem>
+	);
 	return (
 		<Box>
 			<Drawer anchor='right' open={isMenuOpen} onClose={toggleDrawer}>
 				<List>
-					<ListItem>
-						<ListItemButton>
-							<ListItemIcon sx={{ display: 'flex', alignItems: 'center' }}>
-								<FavoriteBorder sx={{ marginRight: '0.3rem' }} />
-								<ListItemText primary='Shortlist' />
-							</ListItemIcon>
-						</ListItemButton>
-					</ListItem>
-					<ListItem>
-						<ListItemButton>
-							<ListItemIcon sx={{ display: 'flex', alignItems: 'center' }}>
-								<MailOutline sx={{ marginRight: '0.3rem' }} />
-								<ListItemText primary='Contact Us' />
-							</ListItemIcon>
-						</ListItemButton>
-					</ListItem>
+					{drawerListItemGenerator(FavoriteBorder, 'Shortlist')}
+					{drawerListItemGenerator(MailOutline, 'Contact Us')}
 				</List>
 			</Drawer>
 			<IconButton sx={{ color: 'white' }} onClick={toggleDrawer}>

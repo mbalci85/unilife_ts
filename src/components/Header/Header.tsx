@@ -5,6 +5,8 @@ import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 import { FavoriteBorder, MailOutline } from '@mui/icons-material';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
 import { useNavigate } from 'react-router-dom';
+import { IconButtonUtils } from '../../utils/IconButtonUtils';
+
 const Header = () => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
 	const navigate = useNavigate();
@@ -34,18 +36,8 @@ const Header = () => {
 				<HamburgerMenu />
 			) : (
 				<Box sx={{ display: 'flex' }}>
-					<Box>
-						<IconButton sx={{ color: 'white' }}>
-							<FavoriteBorder sx={{ marginRight: '0.3rem' }} />
-							<Typography>Shortlist</Typography>
-						</IconButton>
-					</Box>
-					<Box>
-						<IconButton sx={{ color: 'white' }}>
-							<MailOutline sx={{ marginRight: '0.3rem' }} />
-							<Typography>Contact Us</Typography>
-						</IconButton>
-					</Box>
+					{IconButtonUtils.iconButtonGenerator(FavoriteBorder, 'Shortlist')}
+					{IconButtonUtils.iconButtonGenerator(MailOutline, 'Contact Us')}
 				</Box>
 			)}
 		</AppBar>

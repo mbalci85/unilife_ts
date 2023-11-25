@@ -17,7 +17,7 @@ const Header = () => {
 				flexDirection: 'row',
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				height: isSmallScreen ? '6vh' : '10vh',
+				height: isSmallScreen ? '3rem' : '4rem',
 				backgroundColor: '#00A2E1',
 			}}>
 			<Box>

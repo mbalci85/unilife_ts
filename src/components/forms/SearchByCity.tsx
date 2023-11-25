@@ -2,26 +2,14 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/mat
 import { useContext, useState } from 'react';
 import { AllCitiesContext } from '../../contexts/AllCitiesContextProvider';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
+import * as styles from '../../styles/FormStyles';
 
 const SearchByCity = () => {
 	const { isSmallScreen, isMediumScreen } = useContext(MediaQueryContext);
 	const { allCityNames } = useContext(AllCitiesContext);
 	const [selectedCity, setSelectedCity] = useState<string>('');
 	return (
-		<Box
-			sx={{
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				margin: '0 auto',
-				width: isSmallScreen ? '70vw' : '50vw',
-				height: isSmallScreen ? '20vh' : isMediumScreen ? '18vh' : '15vh',
-				border: 'solid  0.05rem',
-				borderRadius: '1.25rem',
-				padding: '1rem',
-				backgroundColor: 'white',
-				boxShadow: '0.2rem 0 0.2rem 0.2rem rgba(0, 0, 0, 0.3)',
-			}}>
+		<Box sx={styles.SearchByCityFormStyle(isSmallScreen, isMediumScreen)}>
 			<Box sx={{ width: '100%' }}>
 				<form
 					style={{

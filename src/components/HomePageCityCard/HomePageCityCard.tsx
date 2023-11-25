@@ -2,6 +2,7 @@ import { Box, Typography } from '@mui/material';
 import { City } from '../../interfaces/City';
 import { useContext } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
+import * as styles from '../../styles/HomePageCityCardStyles';
 
 interface CityCardProps {
 	city: City;
@@ -19,45 +20,14 @@ const HomePageCityCard = ({ city }: CityCardProps) => {
 	};
 
 	return (
-		<Box
-			sx={{
-				position: 'relative',
-				display: 'flex',
-				flexWrap: 'wrap',
-				justifyContent: 'center',
-				alignItems: 'center',
-				height: isSmallScreen ? '10rem' : '13rem',
-				width: isSmallScreen ? '70vw' : '30vw',
-				margin: '1rem',
-				borderRadius: '0.8rem',
-				color: 'white',
-				boxShadow: '0.1rem 0 0.3rem 0.1rem rgba(0, 0, 0, 0.6)',
-				transition: '0.3s',
-				':hover': {
-					boxShadow: '0.2rem 0 0.5rem 0.2rem rgba(0, 0, 0, 0.7)',
-				},
-			}}>
+		<Box sx={styles.HomePageCityCardContainerStyles(isSmallScreen)}>
 			<img
 				src={city.image_url}
 				alt={city.name}
 				onError={handleImageError}
-				style={{
-					width: '100%',
-					height: '100%',
-					objectFit: 'cover',
-					borderRadius: '0.8rem',
-				}}
+				style={styles.HomePageCityCardImgStyles()}
 			/>
-			<Box
-				sx={{
-					position: 'absolute',
-					top: 0,
-					left: 0,
-					width: '100%',
-					height: '100%',
-					backgroundColor: 'rgba(0,0,0,0.5)',
-					borderRadius: '0.8rem',
-				}}></Box>
+			<Box sx={styles.HomePageCityCardOverlayStyles()}></Box>
 			<Box sx={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 				<Typography variant='h5'>{city.name}</Typography>
 				<Typography variant='body1'>

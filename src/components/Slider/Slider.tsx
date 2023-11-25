@@ -19,12 +19,12 @@ const Slider = ({ sliderText }: SliderTextProps) => {
 				position: 'relative',
 				display: 'flex',
 				justifyContent: 'center',
-				height: '40vh',
+				height: '15rem',
 				backgroundImage: `url(${backgroundImage})`,
 				backgroundSize: 'cover',
 				backgroundPosition: 'center center',
 				color: 'white',
-				paddingTop: isSmallScreen ? '3rem' : '5rem',
+				paddingTop: isSmallScreen ? '2rem' : '5rem',
 			}}>
 			<Box
 				sx={{
@@ -41,7 +41,11 @@ const Slider = ({ sliderText }: SliderTextProps) => {
 				</Typography>
 				<Typography variant={isSmallScreen ? 'body1' : 'h6'}>{sliderText.subtitle}</Typography>
 			</Box>
-			<Box sx={{ position: 'absolute', bottom: -70 }}>
+			<Box
+				sx={{
+					position: 'absolute',
+					bottom: '-4rem',
+				}}>
 				<SearchByCity />
 			</Box>
 		</Box>

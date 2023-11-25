@@ -32,10 +32,11 @@ const HomePageFeatures = () => {
 						alignItems: 'center',
 						width: '70%',
 						margin: '1rem 2rem 2rem 1rem',
+						textAlign: 'center',
 					}}>
 					<TravelExploreOutlined sx={{ color: '#3A5295', fontSize: '4rem' }} />
 					<Typography variant='h6'>Search</Typography>
-					<Typography variant='body1' sx={{ textAlign: 'center' }}>
+					<Typography variant='body1' sx={{ textAlign: 'center', color: 'gray' }}>
 						Find your dream home in the perfect area near your university.
 					</Typography>
 				</Box>
@@ -47,10 +48,11 @@ const HomePageFeatures = () => {
 						alignItems: 'center',
 						width: '70%',
 						margin: '1rem 2rem 2rem 1rem',
+						textAlign: 'center',
 					}}>
 					<Rule fontSize='large' sx={{ color: '#3A5295', fontSize: '4rem' }} />
 					<Typography variant='h6'>Compare</Typography>
-					<Typography variant='body1' sx={{ textAlign: 'center' }}>
+					<Typography variant='body1' sx={{ textAlign: 'center', color: 'gray' }}>
 						Compare student accommodation to find the right home for you.
 					</Typography>
 				</Box>
@@ -62,10 +64,13 @@ const HomePageFeatures = () => {
 						alignItems: 'center',
 						width: '70%',
 						margin: '1rem 2rem 2rem 1rem',
+						textAlign: 'center',
 					}}>
 					<ReceiptLongOutlined fontSize='large' sx={{ color: '#3A5295', fontSize: '4rem' }} />
-					<Typography variant='h6'>Bills Included</Typography>
-					<Typography variant='body1' sx={{ textAlign: 'center' }}>
+					<Typography variant='h6' sx={{ textAlign: 'center' }}>
+						Bills Included
+					</Typography>
+					<Typography variant='body1' sx={{ textAlign: 'center', color: 'gray' }}>
 						Bills are included in all rent prices. No hidden fees.
 					</Typography>
 				</Box>
@@ -77,7 +82,7 @@ const HomePageFeatures = () => {
 							<CottageOutlined sx={{ color: '#3A5295', fontSize: '3rem', marginRight: '0.75rem' }} />
 							<Box>
 								<Typography variant='h6'>Best selection</Typography>
-								<Typography variant='body2'>
+								<Typography variant='body2' sx={{ color: 'gray' }}>
 									Best selection of student accommodations. Never been easier to find a home that’s
 									right for you.
 								</Typography>
@@ -90,7 +95,7 @@ const HomePageFeatures = () => {
 							/>
 							<Box>
 								<Typography variant='h6'>Your favorite</Typography>
-								<Typography variant='body2'>
+								<Typography variant='body2' sx={{ color: 'gray' }}>
 									Shortlist your favorite properties and send enquiries in one click.
 								</Typography>
 							</Box>

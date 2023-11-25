@@ -1,24 +1,24 @@
-import { FacebookOutlined, Instagram, Twitter } from '@mui/icons-material';
+import { Facebook, Instagram, Twitter } from '@mui/icons-material';
 import { Box, IconButton, Typography } from '@mui/material';
 import { useContext, useState } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import axios from 'axios';
+import * as styles from '../../styles/KeepInTouchStyles';
 
 const KeepInTouch = () => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
 	const [subscriptionEmail, setSubscriptionEmail] = useState<string>('');
 	const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
 
+	const socialMediaIconGenerator = (AppName: React.ElementType, app: string): JSX.Element => (
+		<IconButton sx={{ color: 'white' }}>
+			<AppName sx={{ marginRight: '0.3rem' }} />
+			<Typography variant='body2'>{app}</Typography>
+		</IconButton>
+	);
+
 	return (
-		<Box
-			sx={{
-				display: 'flex',
-				flexDirection: isSmallScreen ? 'column' : 'row',
-				justifyContent: isSmallScreen ? null : 'center',
-				backgroundColor: 'rgba(0, 162, 225, 1)',
-				color: 'white',
-				padding: '1rem 2rem',
-			}}>
+		<Box sx={styles.KeepInTouchContainerStyles(isSmallScreen)}>
 			<Box sx={{ marginBottom: '2rem', width: isSmallScreen ? '100%' : '70%' }}>
 				<Typography variant='h6' sx={{ marginBottom: '1rem' }}>
 					Keep in touch
@@ -35,9 +35,10 @@ const KeepInTouch = () => {
 								email: subscriptionEmail,
 							})
 							.then((response) => {
-								setIsSubscribed(true);
-								setSubscriptionEmail('');
-								console.log(response);
+								if (response.status === 200 && response.statusText === 'OK') {
+									setIsSubscribed(true);
+									setSubscriptionEmail('');
+								}
 							})
 							.catch((err) => {
 								console.log(err);
@@ -46,13 +47,7 @@ const KeepInTouch = () => {
 					<input
 						type='email'
 						placeholder='Your Email'
-						style={{
-							width: isSmallScreen ? '80%' : '50%',
-							height: '2rem',
-							border: 'none',
-							borderRadius: '0.3rem',
-							padding: '0.5rem',
-						}}
+						style={styles.KeepInTouchInputStyles(isSmallScreen)}
 						value={subscriptionEmail}
 						onChange={(e) => {
 							setSubscriptionEmail(e.target.value);
@@ -68,18 +63,9 @@ const KeepInTouch = () => {
 			</Box>
 			<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
 				<Typography variant='h6'>Let's Socialize</Typography>
-				<IconButton sx={{ color: 'white' }}>
-					<FacebookOutlined sx={{ marginRight: '0.3rem' }} />
-					<Typography variant='body2'>Facebook</Typography>
-				</IconButton>
-				<IconButton sx={{ color: 'white' }}>
-					<Twitter sx={{ marginRight: '0.3rem' }} />
-					<Typography variant='body2'>Twitter</Typography>
-				</IconButton>
-				<IconButton sx={{ color: 'white' }}>
-					<Instagram sx={{ marginRight: '0.3rem' }} />
-					<Typography variant='body2'>Instagram</Typography>
-				</IconButton>
+				{socialMediaIconGenerator(Facebook, 'Facebook')}
+				{socialMediaIconGenerator(Twitter, 'Twitter')}
+				{socialMediaIconGenerator(Instagram, 'Instagram')}
 			</Box>
 		</Box>
 	);

@@ -11,7 +11,7 @@ const Footer = () => {
 				display: 'flex',
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				height: isSmallScreen ? '13vh' : '10vh',
+				height: isSmallScreen ? '6rem' : '5rem',
 				backgroundColor: 'black',
 				color: 'white',
 				padding: '0.3rem 0.7rem',

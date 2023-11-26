@@ -6,6 +6,7 @@ import HomePageCityCards from '../../components/HomePageCityCards/HomePageCityCa
 import { useNavigate } from 'react-router-dom';
 import KeepInTouch from '../../components/KeepInTouch/KeepInTouch';
 import HomePageFeatures from '../../components/HomePageFeatures/HomePageFeatures';
+import SearchByCity from '../../components/forms/SearchByCity';
 
 const HomePage = () => {
 	const { isSmallScreen, isMediumScreen } = useContext(MediaQueryContext);
@@ -13,7 +14,8 @@ const HomePage = () => {
 
 	const sliderText = {
 		title: 'Find student homes with bills included',
-		subtitle: 'A simple and faster way to search for student accommodation',
+		subtitle1: 'A simple and faster way to search for student accommodation',
+		subtitle2: '',
 	};
 
 	const btnStyle = {
@@ -27,7 +29,20 @@ const HomePage = () => {
 
 	return (
 		<Box sx={{ minHeight: isSmallScreen ? '88vh' : '80vh' }}>
-			<Slider sliderText={sliderText} />
+			<Box>
+				<Slider sliderText={sliderText} />
+
+				<Box
+					sx={{
+						display: 'flex',
+						justifyContent: 'center',
+						marginTop: isSmallScreen ? '-4rem' : '-2rem',
+						zIndex: 100,
+					}}>
+					<SearchByCity />
+				</Box>
+			</Box>
+
 			<HomePageCityCards />
 			<Box sx={{ display: 'flex', justifyContent: 'center' }}>
 				<Button

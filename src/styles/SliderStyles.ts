@@ -8,6 +8,7 @@ export const SliderContainerStyles = (backgroundImage: string, isSmallScreen: bo
 	backgroundPosition: 'center center',
 	color: 'white',
 	paddingTop: isSmallScreen ? '2rem' : '5rem',
+	zIndex: -100,
 });
 
 export const SliderOverlayStyles = () => ({

@@ -45,34 +45,23 @@ const HomePageFeatures = () => {
 			{!isMediumScreen ? (
 				<Box sx={{ display: 'flex', margin: '3rem 2rem 0 2rem' }}>
 					<Box>
-						<Box sx={{ display: 'flex', margin: '3rem', width: '70%' }}>
-							<CottageOutlined sx={{ color: '#3A5295', fontSize: '3rem', marginRight: '0.75rem' }} />
-							<Box>
-								<Typography variant='h6'>Best selection</Typography>
-								<Typography variant='body2' sx={{ color: 'gray' }}>
-									Best selection of student accommodations. Never been easier to find a home that’s
-									right for you.
-								</Typography>
-							</Box>
-						</Box>
-
-						<Box sx={{ display: 'flex', margin: '3rem', width: '70%' }}>
-							<FavoriteBorderOutlined
-								sx={{ color: '#3A5295', fontSize: '3rem', marginRight: '0.75rem' }}
-							/>
-							<Box>
-								<Typography variant='h6'>Your favorite</Typography>
-								<Typography variant='body2' sx={{ color: 'gray' }}>
-									Shortlist your favorite properties and send enquiries in one click.
-								</Typography>
-							</Box>
-						</Box>
+						{HomePageCommonFeatures.homePageLargeScreenFeatureGenerator(
+							CottageOutlined,
+							'Best selection',
+							'Best selection of student accommodations. Never been easier to find a home that’s right for you.'
+						)}
+						{HomePageCommonFeatures.homePageLargeScreenFeatureGenerator(
+							FavoriteBorderOutlined,
+							'Your favorite',
+							'Shortlist your favorite properties and send enquiries in one click.'
+						)}
 						<Button
 							sx={{
 								backgroundColor: '#3A5295',
 								color: '#FFFFFF',
 								padding: '0.5rem 1rem',
 								marginLeft: '3.5rem',
+								textTransform: 'capitalize',
 								':hover': {
 									backgroundColor: 'rgba(0, 162, 225, 1)',
 								},

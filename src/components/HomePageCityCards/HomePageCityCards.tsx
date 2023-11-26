@@ -11,9 +11,8 @@ const HomePageCityCards = () => {
 				Student accommodations in our top cities
 			</Typography>
 			<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-				{allCities.slice(0, 9).map((city, index) => (
-					<HomePageCityCard key={city.id || index} city={city} />
-				))}
+				{allCities &&
+					allCities.slice(0, 9).map((city, index) => <HomePageCityCard key={city.id || index} city={city} />)}
 			</Box>
 		</Box>
 	);

@@ -4,7 +4,6 @@ import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import Slider from '../../components/Slider/Slider';
 import HomePageCityCards from '../../components/HomePageCityCards/HomePageCityCards';
 import { useNavigate } from 'react-router-dom';
-import KeepInTouch from '../../components/KeepInTouch/KeepInTouch';
 import HomePageFeatures from '../../components/HomePageFeatures/HomePageFeatures';
 import SearchByCity from '../../components/forms/SearchByCity';
 
@@ -22,6 +21,7 @@ const HomePage = () => {
 		backgroundColor: '#3A5295',
 		color: '#FFFFFF',
 		padding: '0.5rem 1rem',
+		textTransform: 'capitalize',
 		':hover': {
 			backgroundColor: 'rgba(0, 162, 225, 1)',
 		},
@@ -49,6 +49,7 @@ const HomePage = () => {
 					sx={btnStyle}
 					onClick={() => {
 						navigate('/all_cities');
+						window.scrollTo({ top: 0, behavior: 'smooth' });
 					}}>
 					See All Cities
 				</Button>
@@ -65,7 +66,6 @@ const HomePage = () => {
 					</Button>
 				</Box>
 			) : null}
-			<KeepInTouch />
 		</Box>
 	);
 };

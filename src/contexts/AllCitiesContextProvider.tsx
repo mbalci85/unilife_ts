@@ -7,13 +7,18 @@ type Cities = City[];
 interface AllCitiesContextTypes {
 	allCities: Cities;
 	allCityNames: string[];
+	allCitiesBaseUrl: string;
 }
 
 interface AllCitiesContextProviderProps {
 	children: ReactNode;
 }
 
-export const AllCitiesContext = createContext<AllCitiesContextTypes>({ allCities: [], allCityNames: [] });
+export const AllCitiesContext = createContext<AllCitiesContextTypes>({
+	allCities: [],
+	allCityNames: [],
+	allCitiesBaseUrl: '',
+});
 
 const AllCitiesContextProvider = (props: AllCitiesContextProviderProps) => {
 	const [allCities, setAllCities] = useState<Cities>([]);
@@ -39,7 +44,11 @@ const AllCitiesContextProvider = (props: AllCitiesContextProviderProps) => {
 		fetchCities();
 	}, []);
 
-	return <AllCitiesContext.Provider value={{ allCities, allCityNames }}>{props.children}</AllCitiesContext.Provider>;
+	return (
+		<AllCitiesContext.Provider value={{ allCities, allCityNames, allCitiesBaseUrl }}>
+			{props.children}
+		</AllCitiesContext.Provider>
+	);
 };
 
 export default AllCitiesContextProvider;

@@ -1,10 +1,10 @@
 export interface City {
-	id: string;
+	_id: string;
 	name: string;
 	universities: string;
 	student_life: string;
 	image_url: string;
 	createdAt: string;
 	updatedAt: string;
-	property_count: number;
+	property_count?: number;
 }

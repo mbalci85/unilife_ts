@@ -45,7 +45,12 @@ const SearchByCity = () => {
 					</FormControl>
 					<Button
 						variant='contained'
-						sx={{ backgroundColor: '#3A5295', width: isSmallScreen ? '75%' : '60%', height: '2.25rem' }}>
+						sx={{
+							backgroundColor: '#3A5295',
+							width: isSmallScreen ? '75%' : '60%',
+							height: '2.25rem',
+							textTransform: 'capitalize',
+						}}>
 						Find Homes
 					</Button>
 				</form>

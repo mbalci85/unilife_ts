@@ -3,16 +3,16 @@ import { Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, 
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 
-const HamburgerMenu = () => {
+const HamburgerMenu = ({ openForm }: any) => {
 	const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
 	const toggleDrawer = (): void => {
 		setIsMenuOpen(!isMenuOpen);
 	};
 
-	const drawerListItemGenerator = (ItemIcon: React.ElementType, listItemText: string) => (
+	const drawerListItemGenerator = (ItemIcon: React.ElementType, listItemText: string, OnClick: () => void) => (
 		<ListItem>
-			<ListItemButton>
+			<ListItemButton onClick={OnClick}>
 				<ListItemIcon sx={{ display: 'flex', alignItems: 'center' }}>
 					<ItemIcon sx={{ marginRight: '0.3rem' }} />
 					<ListItemText primary={listItemText} />
@@ -24,8 +24,11 @@ const HamburgerMenu = () => {
 		<Box>
 			<Drawer anchor='right' open={isMenuOpen} onClose={toggleDrawer}>
 				<List>
-					{drawerListItemGenerator(FavoriteBorder, 'Shortlist')}
-					{drawerListItemGenerator(MailOutline, 'Contact Us')}
+					{drawerListItemGenerator(FavoriteBorder, 'Shortlist', () => {})}
+					{drawerListItemGenerator(MailOutline, 'Contact Us', () => {
+						openForm();
+						toggleDrawer();
+					})}
 				</List>
 			</Drawer>
 			<IconButton sx={{ color: 'white' }} onClick={toggleDrawer}>

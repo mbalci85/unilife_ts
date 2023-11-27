@@ -1,15 +1,22 @@
-import { AppBar, Box, IconButton, Typography } from '@mui/material';
-import { useContext } from 'react';
+import { AppBar, Box, Dialog, IconButton, Typography } from '@mui/material';
+import { useContext, useState } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import HolidayVillageIcon from '@mui/icons-material/HolidayVillage';
 import { FavoriteBorder, MailOutline } from '@mui/icons-material';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
 import { useNavigate } from 'react-router-dom';
 import { IconButtonUtils } from '../../utils/IconButtonUtils';
+import ContactUs from '../forms/ContactUs';
 
 const Header = () => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
 	const navigate = useNavigate();
+
+	const [isContactUsFormOpen, setIsContactUsFormOpen] = useState<boolean>(false);
+
+	const openForm = (): void => setIsContactUsFormOpen(true);
+
+	const closeForm = (): void => setIsContactUsFormOpen(false);
 
 	return (
 		<AppBar
@@ -33,13 +40,22 @@ const Header = () => {
 				</IconButton>
 			</Box>
 			{isSmallScreen ? (
-				<HamburgerMenu />
+				<HamburgerMenu openForm={openForm} />
 			) : (
 				<Box sx={{ display: 'flex' }}>
-					{IconButtonUtils.iconButtonGenerator(FavoriteBorder, 'Shortlist')}
-					{IconButtonUtils.iconButtonGenerator(MailOutline, 'Contact Us')}
+					{IconButtonUtils.iconButtonGenerator(FavoriteBorder, 'Shortlist', () => {})}
+					{IconButtonUtils.iconButtonGenerator(MailOutline, 'Contact Us', openForm)}
 				</Box>
 			)}
+
+			<Dialog
+				open={isContactUsFormOpen}
+				onClose={closeForm}
+				fullWidth
+				maxWidth='md'
+				sx={{ margin: isSmallScreen ? '0.5rem' : '2.5rem' }}>
+				<ContactUs />
+			</Dialog>
 		</AppBar>
 	);
 };

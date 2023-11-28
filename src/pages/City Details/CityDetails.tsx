@@ -2,16 +2,24 @@ import { Box, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import { useParams } from 'react-router-dom';
-import { AllCitiesContext } from '../../contexts/AllCitiesContextProvider';
 import axios from 'axios';
 import { City } from '../../interfaces/City';
 import Slider from '../../components/Slider/Slider';
+import { Property } from '../../interfaces/Property';
+import SearchAccommodationInCity from '../../components/forms/SearchAccommodationInCity';
 
 const CityDetails = () => {
 	const { isVerySmallScreen } = useContext(MediaQueryContext);
-	const { allCitiesBaseUrl } = useContext(AllCitiesContext);
-	const { id } = useParams();
+	const { city_id } = useParams();
 	const [cityDetails, setCityDetails] = useState<City>();
+	const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
+
+	const [bedroom_count, setBedroomCount] = useState<string>('');
+	const [bathroom_count, setBathroomCount] = useState<string>('');
+	const [rent, setRent] = useState<string>('');
+	const [property_type, setPropertyTypeSelected] = useState<string>('');
+
+	const allCitiesBaseUrl: string = 'https://unilife-server.herokuapp.com/cities';
 
 	const sliderText = {
 		title: 'Search Accommodation',
@@ -20,10 +28,36 @@ const CityDetails = () => {
 	};
 
 	useEffect(() => {
-		const fetchCityDetails = async () => {
-			const response = await axios.get(`${allCitiesBaseUrl}/${id}`);
-			setCityDetails(response.data.data[0]);
+		const handlePropertyFilter = async () => {
+			const query = {
+				city_id,
+				bedroom_count: +bedroom_count,
+				bathroom_count: +bathroom_count,
+				property_type,
+				rent: +rent,
+			};
+
+			await axios
+				.post('https://unilife-server.herokuapp.com/properties/filter', { query })
+				.then((response) => {
+					if (response.data.status !== 404) {
+						console.log(response.data.response);
+					}
+				})
+				.catch((error) => {
+					console.log(error);
+				});
 		};
+		handlePropertyFilter();
+		const fetchCityDetails = async () => {
+			try {
+				const response = await axios.get(`${allCitiesBaseUrl}/${city_id}`);
+				setCityDetails(response.data.data[0]);
+			} catch (error) {
+				console.log(error);
+			}
+		};
+
 		fetchCityDetails();
 	}, []);
 	return (
@@ -31,8 +65,18 @@ const CityDetails = () => {
 			{cityDetails && (
 				<>
 					<Slider sliderText={sliderText} />
+					<SearchAccommodationInCity
+						bedroom_count={bedroom_count}
+						bathroom_count={bathroom_count}
+						rent={rent}
+						property_type={property_type}
+						setBedroomCount={setBedroomCount}
+						setBathroomCount={setBathroomCount}
+						setRent={setRent}
+						setPropertyTypeSelected={setPropertyTypeSelected}
+					/>
 					<Typography variant='h5'>
-						{cityDetails?.property_count}
+						{cityDetails.property_count}
 						{cityDetails.property_count && cityDetails?.property_count > 1 ? ' homes' : ' home'} in{' '}
 						{cityDetails.name}
 					</Typography>

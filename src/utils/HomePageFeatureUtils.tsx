@@ -29,8 +29,17 @@ export const HomePageCommonFeatures: HomePageFeaturesType = {
 	},
 	homePageLargeScreenFeatureGenerator: (Icon: React.ElementType, title: string, content: string) => {
 		return (
-			<Box sx={{ display: 'flex', margin: '3rem', width: '70%' }}>
-				<Icon sx={{ color: '#3A5295', fontSize: '3rem', marginRight: '0.75rem' }} />
+			<Box
+				sx={{
+					display: 'flex',
+					justifyContent: 'flex-start',
+					margin: '3rem',
+					padding: '1rem',
+					width: '70%',
+				}}>
+				<Box>
+					<Icon sx={{ color: '#3A5295', fontSize: '3rem', marginRight: '0.75rem' }} />
+				</Box>
 				<Box>
 					<Typography variant='h6'>{title}</Typography>
 					<Typography variant='body2' sx={{ color: 'gray' }}>

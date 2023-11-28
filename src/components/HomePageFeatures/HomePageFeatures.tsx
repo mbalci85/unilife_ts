@@ -43,8 +43,8 @@ const HomePageFeatures = () => {
 				)}
 			</Box>
 			{!isMediumScreen ? (
-				<Box sx={{ display: 'flex', margin: '3rem 2rem 0 2rem' }}>
-					<Box>
+				<Box sx={{ display: 'flex', justifyContent: 'center', margin: '3rem 2rem 0 2rem' }}>
+					<Box sx={{}}>
 						{HomePageCommonFeatures.homePageLargeScreenFeatureGenerator(
 							CottageOutlined,
 							'Best selection',

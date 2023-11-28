@@ -27,19 +27,23 @@ const AllCitiesContextProvider = (props: AllCitiesContextProviderProps) => {
 
 	useEffect(() => {
 		const fetchCities = async (): Promise<void> => {
-			const allCitiesData: AxiosResponse<any, any> = await axios.get(allCitiesBaseUrl);
+			try {
+				const allCitiesData: AxiosResponse<any, any> = await axios.get(allCitiesBaseUrl);
 
-			const totalNumberOfCities: number = await allCitiesData.data.total;
+				const totalNumberOfCities: number = await allCitiesData.data.total;
 
-			const response = await axios.get(`${allCitiesBaseUrl}?limit=${totalNumberOfCities}`);
+				const response = await axios.get(`${allCitiesBaseUrl}?limit=${totalNumberOfCities}`);
 
-			setAllCities(response.data.response);
+				setAllCities(response.data.response);
 
-			const cityNames: string[] = response.data.response.reduce((acc: string[], item: City) => {
-				acc.push(item.name);
-				return acc;
-			}, []);
-			setAllCityNames(cityNames);
+				const cityNames: string[] = response.data.response.reduce((acc: string[], item: City) => {
+					acc.push(item.name);
+					return acc;
+				}, []);
+				setAllCityNames(cityNames);
+			} catch (error) {
+				console.log(error);
+			}
 		};
 		fetchCities();
 	}, []);

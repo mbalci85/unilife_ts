@@ -21,7 +21,7 @@ function App() {
 						<Routes>
 							<Route path='/' element={<HomePage />} />
 							<Route path='/all_cities' element={<AllCities />} />
-							<Route path='/city/:id' element={<CityDetails />} />
+							<Route path='/city/:city_id' element={<CityDetails />} />
 							<Route path='/home/:id' element={<HomeDetail />} />
 						</Routes>
 						<KeepInTouch />

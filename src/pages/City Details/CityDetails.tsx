@@ -7,6 +7,7 @@ import { City } from '../../interfaces/City';
 import Slider from '../../components/Slider/Slider';
 import { Property } from '../../interfaces/Property';
 import SearchAccommodationInCity from '../../components/forms/SearchAccommodationInCity';
+import PropertyCard from '../../components/Property Card/PropertyCard';
 
 const CityDetails = () => {
 	const { isVerySmallScreen, isSmallScreen } = useContext(MediaQueryContext);
@@ -90,6 +91,12 @@ const CityDetails = () => {
 						{cityDetails.property_count && cityDetails?.property_count > 1 ? ' homes' : ' home'} in{' '}
 						{cityDetails.name}
 					</Typography>
+					<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+						{filteredProperties &&
+							filteredProperties.map((property) => (
+								<PropertyCard property={property} key={property._id} />
+							))}
+					</Box>
 				</>
 			)}
 		</Box>

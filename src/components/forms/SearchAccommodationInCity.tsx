@@ -1,6 +1,7 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 
 interface SearchAccommodationInCityProps {
 	bedroom_count?: string;
@@ -25,6 +26,8 @@ const SearchAccommodationInCity = ({
 }: SearchAccommodationInCityProps) => {
 	const [propertyTypes, setPropertyTypes] = useState<string[]>([]);
 
+	const { isSmallScreen } = useContext(MediaQueryContext);
+
 	useEffect(() => {
 		const fetchPropertyTypes = async () => {
 			try {
@@ -42,21 +45,22 @@ const SearchAccommodationInCity = ({
 		fetchPropertyTypes();
 	}, []);
 	return (
-		<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+		<Box sx={{ display: 'flex', justifyContent: 'center', width: '80%' }}>
 			<form
 				style={{
 					display: 'flex',
-					flexDirection: 'row',
+					flexDirection: isSmallScreen ? 'column' : 'row',
 					justifyContent: 'center',
 					alignItems: 'center',
 					flexWrap: 'wrap',
-					border: 'solid gray 0.01rem',
+					border: 'solid lightgray 0.01rem',
 					borderRadius: '1rem',
 					backgroundColor: 'white',
-					padding: '0.5rem 1rem 1rem 1rem',
-					width: '80%',
+					width: '100%',
+					padding: '1rem',
+					boxShadow: '0.3rem 0 0.5rem 0.1rem rgba(0,0,0,0.2)',
 				}}>
-				<Box sx={{ width: '25%' }}>
+				<Box sx={{ width: isSmallScreen ? '80%' : '25%' }}>
 					<FormControl fullWidth>
 						<InputLabel id='bedroom_count' sx={{ lineHeight: 1 }}>
 							Min Bedroom
@@ -67,7 +71,7 @@ const SearchAccommodationInCity = ({
 							size='small'
 							value={bedroom_count}
 							onChange={(e) => setBedroomCount(e.target.value)}
-							sx={{ width: '90%' }}>
+							sx={{ width: '90%', marginBottom: '0.75rem' }}>
 							{[1, 2, 3, 4, 5].map((num) => (
 								<MenuItem value={num} key={num}>
 									{num}
@@ -76,7 +80,7 @@ const SearchAccommodationInCity = ({
 						</Select>
 					</FormControl>
 				</Box>
-				<Box sx={{ width: '25%' }}>
+				<Box sx={{ width: isSmallScreen ? '80%' : '25%' }}>
 					<FormControl fullWidth>
 						<InputLabel id='bathroom_count' sx={{ lineHeight: 1 }}>
 							Min Bathroom
@@ -87,7 +91,7 @@ const SearchAccommodationInCity = ({
 							size='small'
 							value={bathroom_count}
 							onChange={(e) => setBathroomCount(e.target.value)}
-							sx={{ width: '90%' }}>
+							sx={{ width: '90%', marginBottom: '0.75rem' }}>
 							{[1, 2, 3, 4, 5].map((num) => (
 								<MenuItem value={num} key={num}>
 									{num}
@@ -96,7 +100,7 @@ const SearchAccommodationInCity = ({
 						</Select>
 					</FormControl>
 				</Box>
-				<Box sx={{ width: '25%' }}>
+				<Box sx={{ width: isSmallScreen ? '80%' : '25%' }}>
 					<FormControl fullWidth>
 						<InputLabel id='rent' sx={{ lineHeight: 1 }}>
 							Max Price
@@ -107,7 +111,7 @@ const SearchAccommodationInCity = ({
 							size='small'
 							value={rent}
 							onChange={(e) => setRent(e.target.value)}
-							sx={{ width: '90%' }}>
+							sx={{ width: '90%', marginBottom: '0.75rem' }}>
 							{[500, 600, 700, 800, 900, 1000, 1500, 2000, 2500, 3000, 4000].map((num) => (
 								<MenuItem value={num} key={num}>
 									{num}
@@ -116,7 +120,7 @@ const SearchAccommodationInCity = ({
 						</Select>
 					</FormControl>
 				</Box>
-				<Box sx={{ width: '25%' }}>
+				<Box sx={{ width: isSmallScreen ? '80%' : '25%' }}>
 					<FormControl fullWidth>
 						<InputLabel id='property_type' sx={{ lineHeight: 1 }}>
 							Property Type
@@ -127,7 +131,7 @@ const SearchAccommodationInCity = ({
 							size='small'
 							value={property_type}
 							onChange={(e) => setPropertyTypeSelected(e.target.value)}
-							sx={{ width: '90%' }}>
+							sx={{ width: '90%', marginBottom: '0.75rem' }}>
 							{propertyTypes.map((type) => (
 								<MenuItem value={type} key={type}>
 									{type}

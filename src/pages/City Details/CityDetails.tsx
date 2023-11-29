@@ -7,9 +7,10 @@ import { City } from '../../interfaces/City';
 import Slider from '../../components/Slider/Slider';
 import { Property } from '../../interfaces/Property';
 import SearchAccommodationInCity from '../../components/forms/SearchAccommodationInCity';
+import PropertyCard from '../../components/Property Card/PropertyCard';
 
 const CityDetails = () => {
-	const { isVerySmallScreen } = useContext(MediaQueryContext);
+	const { isVerySmallScreen, isSmallScreen } = useContext(MediaQueryContext);
 	const { city_id } = useParams();
 	const [cityDetails, setCityDetails] = useState<City>();
 	const [filteredProperties, setFilteredProperties] = useState<Property[]>([]);
@@ -41,7 +42,7 @@ const CityDetails = () => {
 				.post('https://unilife-server.herokuapp.com/properties/filter', { query })
 				.then((response) => {
 					if (response.data.status !== 404) {
-						console.log(response.data.response);
+						setFilteredProperties(response.data.response);
 					}
 				})
 				.catch((error) => {
@@ -64,22 +65,38 @@ const CityDetails = () => {
 		<Box sx={{ minHeight: isVerySmallScreen ? '88vh' : '81vh' }}>
 			{cityDetails && (
 				<>
-					<Slider sliderText={sliderText} />
-					<SearchAccommodationInCity
-						bedroom_count={bedroom_count}
-						bathroom_count={bathroom_count}
-						rent={rent}
-						property_type={property_type}
-						setBedroomCount={setBedroomCount}
-						setBathroomCount={setBathroomCount}
-						setRent={setRent}
-						setPropertyTypeSelected={setPropertyTypeSelected}
-					/>
+					<Box sx={{ width: '100%' }}>
+						<Slider sliderText={sliderText} />
+						<Box
+							sx={{
+								display: 'flex',
+								justifyContent: 'center',
+								marginTop: isSmallScreen ? '-5rem' : '-3rem',
+								zIndex: 100,
+							}}>
+							<SearchAccommodationInCity
+								bedroom_count={bedroom_count}
+								bathroom_count={bathroom_count}
+								rent={rent}
+								property_type={property_type}
+								setBedroomCount={setBedroomCount}
+								setBathroomCount={setBathroomCount}
+								setRent={setRent}
+								setPropertyTypeSelected={setPropertyTypeSelected}
+							/>
+						</Box>
+					</Box>
 					<Typography variant='h5'>
 						{cityDetails.property_count}
 						{cityDetails.property_count && cityDetails?.property_count > 1 ? ' homes' : ' home'} in{' '}
 						{cityDetails.name}
 					</Typography>
+					<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+						{filteredProperties &&
+							filteredProperties.map((property) => (
+								<PropertyCard property={property} key={property._id} />
+							))}
+					</Box>
 				</>
 			)}
 		</Box>

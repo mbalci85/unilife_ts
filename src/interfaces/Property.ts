@@ -1,10 +1,10 @@
 export interface Property {
 	address: Address;
 	availability: string;
-	bathroom_count: number;
-	bedroom_count: number;
-	bedroom_prices: BedroomPrices;
-	deposit: number;
+	bathroom_count?: number | undefined;
+	bedroom_count?: number | undefined;
+	bedroom_prices?: BedroomPrices;
+	deposit: number | undefined;
 	furnished: string;
 	images: string[];
 	key_features: string[];

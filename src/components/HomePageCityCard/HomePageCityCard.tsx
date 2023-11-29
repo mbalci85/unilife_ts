@@ -30,9 +30,11 @@ const HomePageCityCard = ({ city }: CityCardProps) => {
 			<Box sx={styles.HomePageCityCardOverlayStyles()}></Box>
 			<Box sx={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
 				<Typography variant='h5'>{city.name}</Typography>
-				<Typography variant='body1'>
-					{city.property_count} {city.property_count > 1 ? 'properties' : 'property'}
-				</Typography>
+				{city.property_count && (
+					<Typography variant='body1'>
+						{city.property_count} {city.property_count > 1 ? 'properties' : 'property'}
+					</Typography>
+				)}
 			</Box>
 		</Box>
 	);

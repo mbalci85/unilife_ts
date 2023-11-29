@@ -12,7 +12,9 @@ const HomePageCityCards = () => {
 			</Typography>
 			<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 				{allCities &&
-					allCities.slice(0, 9).map((city, index) => <HomePageCityCard key={city.id || index} city={city} />)}
+					allCities
+						.slice(0, 9)
+						.map((city, index) => <HomePageCityCard key={city._id || index} city={city} />)}
 			</Box>
 		</Box>
 	);

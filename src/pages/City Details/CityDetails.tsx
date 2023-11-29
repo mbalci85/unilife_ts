@@ -86,16 +86,27 @@ const CityDetails = () => {
 							/>
 						</Box>
 					</Box>
-					<Typography variant='h5'>
-						{cityDetails.property_count}
-						{cityDetails.property_count && cityDetails?.property_count > 1 ? ' homes' : ' home'} in{' '}
-						{cityDetails.name}
-					</Typography>
-					<Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-						{filteredProperties &&
-							filteredProperties.map((property) => (
-								<PropertyCard property={property} key={property._id} />
-							))}
+
+					<Box>
+						<Box sx={{ textAlign: 'center', marginTop: '3rem' }}>
+							<Typography variant='h5'>
+								{cityDetails.property_count}
+								{cityDetails.property_count && cityDetails?.property_count > 1
+									? ' homes'
+									: ' home'} in {cityDetails.name}
+							</Typography>
+						</Box>
+						<Box
+							sx={{
+								display: 'flex',
+								flexWrap: 'wrap',
+								justifyContent: 'space-around',
+							}}>
+							{filteredProperties &&
+								filteredProperties.map((property) => (
+									<PropertyCard property={property} key={property._id} />
+								))}
+						</Box>
 					</Box>
 				</>
 			)}

@@ -8,6 +8,7 @@ import Slider from '../../components/Slider/Slider';
 import { Property } from '../../interfaces/Property';
 import SearchAccommodationInCity from '../../components/forms/SearchAccommodationInCity';
 import PropertyCard from '../../components/Property Card/PropertyCard';
+import student_life_img from '../../assets/student_life.png';
 
 const CityDetails = () => {
 	const { isVerySmallScreen, isSmallScreen } = useContext(MediaQueryContext);
@@ -106,6 +107,34 @@ const CityDetails = () => {
 								filteredProperties.map((property) => (
 									<PropertyCard property={property} key={property._id} />
 								))}
+						</Box>
+					</Box>
+					<Box
+						sx={{
+							display: 'flex',
+							flexDirection: isSmallScreen ? 'column' : 'row',
+							justifyContent: isSmallScreen ? 'center' : 'space-around',
+							alignItems: 'center',
+							backgroundColor: 'rgba(246, 250, 253, 1)',
+							padding: '2rem',
+							margin: '2rem',
+							borderRadius: '2rem',
+						}}>
+						<Box sx={{ margin: '1rem', width: isSmallScreen ? '90%' : '50%' }}>
+							<Typography variant='h5' sx={{ marginBottom: '2rem' }}>
+								Being a student in {cityDetails.name}
+							</Typography>
+							<Typography variant='body1' sx={{ textAlign: 'justify' }}>
+								{cityDetails.student_life}
+							</Typography>
+						</Box>
+						<Box
+							sx={{
+								margin: '1rem',
+								width: isSmallScreen ? '90%' : '50%',
+								textAlign: 'center',
+							}}>
+							<img src={student_life_img} alt='stu_life_img' width='90%' />
 						</Box>
 					</Box>
 				</>

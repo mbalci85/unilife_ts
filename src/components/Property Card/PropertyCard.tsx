@@ -8,11 +8,11 @@ const PropertyCard = ({ property }: any) => {
 	return (
 		<Card
 			sx={{
-				height: '22rem',
-				width: isSmallScreen ? '90vw' : '22rem',
+				height: '25rem',
+				width: isSmallScreen ? '80vw' : '23rem',
 				margin: '2rem',
 			}}>
-			<CardMedia sx={{ height: '9rem' }} image={property.images[0]} title={property.property_description} />
+			<CardMedia sx={{ height: '12rem' }} image={property.images[0]} title={property.property_description} />
 			<CardContent sx={{ width: '100%', padding: 0 }}>
 				<Box
 					sx={{

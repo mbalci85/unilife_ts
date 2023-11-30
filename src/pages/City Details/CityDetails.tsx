@@ -112,15 +112,20 @@ const CityDetails = () => {
 								display: 'flex',
 								flexWrap: 'wrap',
 								justifyContent: 'space-around',
+								marginBottom: !(filteredProperties.length > 0) ? '6rem' : null,
 							}}>
 							{filteredProperties && filteredProperties.length > 0 ? (
 								filteredProperties.map((property) => (
 									<PropertyCard property={property} key={property._id} />
 								))
 							) : (
-								<Dialog open={isNoPropertyDialogOpen} onClose={closeNoPropertyDialog}>
+								<Dialog open={isNoPropertyDialogOpen} onClose={closeNoPropertyDialog} maxWidth='md'>
 									<DialogContent
-										sx={{ px: isSmallScreen ? '2rem' : '5rem', py: '3rem', textAlign: 'center' }}>
+										sx={{
+											px: isSmallScreen ? '1rem' : '2rem',
+											py: isSmallScreen ? '1rem' : '2rem',
+											textAlign: 'center',
+										}}>
 										<Typography variant={isSmallScreen ? 'body1' : 'h6'} color='error'>
 											Unfortunately, there are no properties that meet the criteria specified in
 											the query.
@@ -128,13 +133,15 @@ const CityDetails = () => {
 									</DialogContent>
 									<DialogActions>
 										<Button
+											variant='text'
 											onClick={() => {
 												setBedroomCount('');
 												setBathroomCount('');
 												setRent('');
 												setPropertyTypeSelected('');
 											}}
-											sx={{ margin: '1rem' }}>
+											size='small'
+											sx={{ margin: '0.5rem' }}>
 											Reset Search
 										</Button>
 									</DialogActions>

@@ -2,9 +2,12 @@ import { Box, Card, CardActions, CardContent, CardMedia, IconButton, Typography 
 import { Bathtub, Bed, Home, Place } from '@mui/icons-material';
 import { useContext } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
+import { useNavigate } from 'react-router-dom';
 
 const PropertyCard = ({ property }: any) => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
+	const navigate = useNavigate();
+	console.log(property);
 	return (
 		<Card
 			sx={{
@@ -91,7 +94,11 @@ const PropertyCard = ({ property }: any) => {
 				</Box>
 			</CardContent>
 			<CardActions sx={{ display: 'flex', justifyContent: 'center', padding: '0.2rem' }}>
-				<IconButton>
+				<IconButton 
+					onClick={() => {
+						navigate(`/home/${property._id}`);
+						window.scrollTo({ top: 0, behavior: 'smooth' });
+					}}>
 					<Home />
 					<Typography>View Home</Typography>
 				</IconButton>

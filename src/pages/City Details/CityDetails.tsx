@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, Typography } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import { useParams } from 'react-router-dom';
@@ -21,6 +21,9 @@ const CityDetails = () => {
 	const [rent, setRent] = useState<string>('');
 	const [property_type, setPropertyTypeSelected] = useState<string>('');
 
+	const [isNoPropertyDialogOpen, setIsNoPropertyDialogOpen] = useState<boolean>(false);
+	const closeNoPropertyDialog = () => setIsNoPropertyDialogOpen(false);
+
 	const allCitiesBaseUrl: string = 'https://unilife-server.herokuapp.com/cities';
 
 	const sliderText = {
@@ -29,21 +32,25 @@ const CityDetails = () => {
 		subtitle2: '',
 	};
 
-	useEffect(() => {
-		const handlePropertyFilter = async () => {
-			const query = {
-				city_id,
-				bedroom_count: +bedroom_count,
-				bathroom_count: +bathroom_count,
-				property_type,
-				rent: +rent,
-			};
+	const query = {
+		city_id,
+		bedroom_count: +bedroom_count,
+		bathroom_count: +bathroom_count,
+		property_type,
+		rent: +rent,
+	};
 
+	useEffect(() => {
+		console.log('first');
+		const handlePropertyFilter = async () => {
 			await axios
 				.post('https://unilife-server.herokuapp.com/properties/filter', { query })
 				.then((response) => {
 					if (response.data.status !== 404) {
 						setFilteredProperties(response.data.response);
+					}
+					if (response.data.response.length === 0) {
+						setIsNoPropertyDialogOpen(true);
 					}
 				})
 				.catch((error) => {
@@ -51,6 +58,9 @@ const CityDetails = () => {
 				});
 		};
 		handlePropertyFilter();
+	}, [bathroom_count, bedroom_count, property_type, rent]);
+
+	useEffect(() => {
 		const fetchCityDetails = async () => {
 			try {
 				const response = await axios.get(`${allCitiesBaseUrl}/${city_id}`);
@@ -103,10 +113,33 @@ const CityDetails = () => {
 								flexWrap: 'wrap',
 								justifyContent: 'space-around',
 							}}>
-							{filteredProperties &&
+							{filteredProperties && filteredProperties.length > 0 ? (
 								filteredProperties.map((property) => (
 									<PropertyCard property={property} key={property._id} />
-								))}
+								))
+							) : (
+								<Dialog open={isNoPropertyDialogOpen} onClose={closeNoPropertyDialog}>
+									<DialogContent
+										sx={{ px: isSmallScreen ? '2rem' : '5rem', py: '3rem', textAlign: 'center' }}>
+										<Typography variant={isSmallScreen ? 'body1' : 'h6'} color='error'>
+											Unfortunately, there are no properties that meet the criteria specified in
+											the query.
+										</Typography>
+									</DialogContent>
+									<DialogActions>
+										<Button
+											onClick={() => {
+												setBedroomCount('');
+												setBathroomCount('');
+												setRent('');
+												setPropertyTypeSelected('');
+											}}
+											sx={{ margin: '1rem' }}>
+											Reset Search
+										</Button>
+									</DialogActions>
+								</Dialog>
+							)}
 						</Box>
 					</Box>
 					<Box

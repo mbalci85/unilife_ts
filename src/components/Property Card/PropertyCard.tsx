@@ -79,10 +79,11 @@ const PropertyCard = ({ property }: any) => {
 							display: 'flex',
 							flexDirection: 'row',
 							justifyContent: 'center',
+							alignItems: 'center',
 							padding: '0.75rem',
 							borderBottom: 'solid lightgray 0.01rem',
 						}}>
-						<Place />
+						<Place sx={{ marginRight: '0.3rem' }} />
 						<Typography variant='body2'>
 							{property.address.street}, {property.address.city}, {property.address.postcode}
 						</Typography>

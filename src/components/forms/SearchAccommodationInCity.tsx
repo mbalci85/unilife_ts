@@ -57,7 +57,7 @@ const SearchAccommodationInCity = ({
 					borderRadius: '1rem',
 					backgroundColor: 'white',
 					width: '100%',
-					padding: '1rem',
+					padding: '1.5rem 1rem 1rem 1rem',
 					boxShadow: '0.3rem 0 0.5rem 0.1rem rgba(0,0,0,0.2)',
 				}}>
 				<Box sx={{ width: isSmallScreen ? '80%' : '25%' }}>

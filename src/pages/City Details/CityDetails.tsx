@@ -41,7 +41,6 @@ const CityDetails = () => {
 	};
 
 	useEffect(() => {
-		console.log('first');
 		const handlePropertyFilter = async () => {
 			await axios
 				.post('https://unilife-server.herokuapp.com/properties/filter', { query })

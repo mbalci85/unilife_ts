@@ -7,7 +7,24 @@ import { useNavigate } from 'react-router-dom';
 const PropertyCard = ({ property }: any) => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
 	const navigate = useNavigate();
-	console.log(property);
+
+	const boxStyling = {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		alignItems: 'center',
+		padding: '0.7rem',
+	};
+
+	const boxGenerator = (Icon: React.ElementType, count: string): JSX.Element => (
+		<Box sx={boxStyling}>
+			<Icon />
+			<Typography variant='body2' sx={{ marginLeft: '0.2rem' }}>
+				{count}
+			</Typography>
+		</Box>
+	);
+
 	return (
 		<Card
 			sx={{
@@ -19,13 +36,9 @@ const PropertyCard = ({ property }: any) => {
 			<CardContent sx={{ width: '100%', padding: 0 }}>
 				<Box
 					sx={{
-						display: 'flex',
-						flexDirection: 'row',
-						alignItems: 'center',
-						justifyContent: 'space-between',
+						...boxStyling,
 						backgroundColor: 'rgba(58, 82, 149, 1)',
 						color: 'white',
-						padding: '0.75rem',
 					}}>
 					<Box>
 						<Typography variant='body1'>£{(property.rent / property.bedroom_count).toFixed(2)}</Typography>
@@ -33,57 +46,22 @@ const PropertyCard = ({ property }: any) => {
 					</Box>
 					<Box
 						sx={{
-							display: 'flex',
-							flexDirection: 'row',
-							justifyContent: 'space-between',
-							alignItems: 'center',
+							...boxStyling,
+							padding: 0,
 						}}>
-						<Box
-							sx={{
-								display: 'flex',
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								alignItems: 'center',
-								marginLeft: '0.7rem',
-							}}>
-							<Bed />
-							<Typography variant='body2' sx={{ marginLeft: '0.2rem' }}>
-								{property.bedroom_count}
-							</Typography>
-						</Box>
-						<Box
-							sx={{
-								display: 'flex',
-								flexDirection: 'row',
-								justifyContent: 'space-between',
-								alignItems: 'center',
-								marginLeft: '0.7rem',
-							}}>
-							<Bathtub />
-							<Typography variant='body2' sx={{ marginLeft: '0.2rem' }}>
-								{property.bathroom_count}
-							</Typography>
-						</Box>
+						{boxGenerator(Bed, property.bedroom_count)}
+						{boxGenerator(Bathtub, property.bathroom_count)}
 					</Box>
 				</Box>
 				<Box>
-					<Box
-						sx={{
-							display: 'flex',
-							flexDirection: 'row',
-							justifyContent: 'space-around',
-							padding: '0.75rem',
-						}}>
+					<Box sx={boxStyling}>
 						<Typography variant='body1'>{property.property_type}</Typography>
 						<Typography variant='body1'>{property.furnished}</Typography>
 					</Box>
 					<Box
 						sx={{
-							display: 'flex',
-							flexDirection: 'row',
+							...boxStyling,
 							justifyContent: 'center',
-							alignItems: 'center',
-							padding: '0.75rem',
 							borderBottom: 'solid lightgray 0.01rem',
 						}}>
 						<Place sx={{ marginRight: '0.3rem' }} />
@@ -94,7 +72,7 @@ const PropertyCard = ({ property }: any) => {
 				</Box>
 			</CardContent>
 			<CardActions sx={{ display: 'flex', justifyContent: 'center', padding: '0.2rem' }}>
-				<IconButton 
+				<IconButton
 					onClick={() => {
 						navigate(`/home/${property._id}`);
 						window.scrollTo({ top: 0, behavior: 'smooth' });

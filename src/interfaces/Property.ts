@@ -1,15 +1,19 @@
+import { City } from './City';
+
 export interface Property {
 	address: Address;
 	availability: string;
 	bathroom_count?: number | undefined;
 	bedroom_count?: number | undefined;
-	bedroom_prices?: BedroomPrices;
+	bedroom_prices?: BedroomPrices | undefined;
+	city_id?: City;
 	deposit: number | undefined;
 	furnished: string;
 	images: string[];
 	key_features: string[];
 	property_description: string;
 	property_type: string;
+	rent?: number | undefined;
 	_id: string;
 }
 

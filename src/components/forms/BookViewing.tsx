@@ -23,8 +23,13 @@ const BookViewing = ({ homeDetails }: BookViewingProps) => {
 		</Box>
 	);
 	return (
-		<Box sx={{ padding: isSmallScreen ? '1rem' : '3rem' }}>
-			<Box sx={{ width: '100%', marginBottom: '1.25rem' }}>
+		<Box
+			sx={{
+				display: isSmallScreen ? 'flex' : null,
+				flexDirection: isSmallScreen ? 'column' : 'row',
+				padding: isSmallScreen ? '1rem' : '3rem',
+			}}>
+			<Box sx={{ width: '100%', marginBottom: '1.25rem', textAlign: isSmallScreen ? 'center' : null }}>
 				<Typography variant='h6'>Book a Viewing</Typography>
 				<Typography variant='body2'>
 					{homeDetails.address.street}, {homeDetails.address.city},{homeDetails.address.postcode}
@@ -35,6 +40,8 @@ const BookViewing = ({ homeDetails }: BookViewingProps) => {
 					display: 'flex',
 					flexDirection: isSmallScreen ? 'column' : 'row',
 					justifyContent: 'space-between',
+					alignItems: 'center',
+					width: isSmallScreen ? '100%' : null,
 				}}>
 				<Box sx={{ width: isSmallScreen ? '90%' : '45%' }}>
 					{inputGenerator('Name', 'text')}

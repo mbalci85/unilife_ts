@@ -1,5 +1,5 @@
 import { Box, Button, Dialog, Typography } from '@mui/material';
-import { ReactElement, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -7,6 +7,7 @@ import { Property } from '../../interfaces/Property';
 import { Bathtub, Bed, CheckCircleOutlined, ChevronLeft, FavoriteBorderOutlined } from '@mui/icons-material';
 import BookViewing from '../../components/forms/BookViewing';
 import * as styles from '../../styles/HomeDetailPageStyles';
+import { HomeDetailPageUtils } from '../../utils/HomeDetailPageUtils';
 
 const HomeDetail = () => {
 	const { isVerySmallScreen, isMediumScreen, isSmallScreen } = useContext(MediaQueryContext);
@@ -23,25 +24,6 @@ const HomeDetail = () => {
 
 	const homeDetailBaseUrl = 'https://unilife-server.herokuapp.com/properties';
 
-	const homeDetailBoxGenerator = (
-		detailTitle: string,
-		IconName?: React.ElementType | null,
-		detailContent?: string | number
-	): ReactElement => {
-		return (
-			<Box sx={{ marginTop: '1.25rem' }}>
-				<Typography variant='body1' sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-					{detailTitle}
-				</Typography>
-				<Box sx={{ display: 'flex', justifyContent: 'center', color: '#3A5295' }}>
-					{IconName && <IconName sx={{ marginRight: '0.3rem' }} />}
-					<Typography variant='body1' sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-						{detailContent}
-					</Typography>
-				</Box>
-			</Box>
-		);
-	};
 	useEffect(() => {
 		const fetchHomeDetails = async (): Promise<void> => {
 			try {
@@ -124,16 +106,46 @@ const HomeDetail = () => {
 										width: '100%',
 									}}>
 									<Box sx={styles.homeDetailColumnBoxStyles()}>
-										{homeDetailBoxGenerator('Bedroom', Bed, homeDetails.bedroom_count)}
-										{homeDetailBoxGenerator('Price', null, `£${homeDetails.rent}`)}
+										{HomeDetailPageUtils.homeDetailBoxGenerator(
+											'Bedroom',
+											isMediumScreen,
+											Bed,
+											homeDetails.bedroom_count
+										)}
+										{HomeDetailPageUtils.homeDetailBoxGenerator(
+											'Price',
+											isMediumScreen,
+											null,
+											`£${homeDetails.rent}`
+										)}
 									</Box>
 									<Box sx={styles.homeDetailColumnBoxStyles()}>
-										{homeDetailBoxGenerator('Bathrooms', Bathtub, homeDetails.bathroom_count)}
-										{homeDetailBoxGenerator('Furnished Type', null, homeDetails.furnished)}
+										{HomeDetailPageUtils.homeDetailBoxGenerator(
+											'Bathrooms',
+											isMediumScreen,
+											Bathtub,
+											homeDetails.bathroom_count
+										)}
+										{HomeDetailPageUtils.homeDetailBoxGenerator(
+											'Furnished Type',
+											isMediumScreen,
+											null,
+											homeDetails.furnished
+										)}
 									</Box>
 									<Box sx={styles.homeDetailColumnBoxStyles()}>
-										{homeDetailBoxGenerator('Property Type', null, homeDetails.property_type)}
-										{homeDetailBoxGenerator('Available from', null, homeDetails.availability)}
+										{HomeDetailPageUtils.homeDetailBoxGenerator(
+											'Property Type',
+											isMediumScreen,
+											null,
+											homeDetails.property_type
+										)}
+										{HomeDetailPageUtils.homeDetailBoxGenerator(
+											'Available from',
+											isMediumScreen,
+											null,
+											homeDetails.availability
+										)}
 									</Box>
 								</Box>
 							</Box>

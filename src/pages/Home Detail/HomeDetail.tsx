@@ -1,11 +1,12 @@
 import { Box, Button, Dialog, Typography } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { ReactElement, useContext, useEffect, useState } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Property } from '../../interfaces/Property';
 import { Bathtub, Bed, CheckCircleOutlined, ChevronLeft, FavoriteBorderOutlined } from '@mui/icons-material';
 import BookViewing from '../../components/forms/BookViewing';
+import * as styles from '../../styles/HomeDetailPageStyles';
 
 const HomeDetail = () => {
 	const { isVerySmallScreen, isMediumScreen, isSmallScreen } = useContext(MediaQueryContext);
@@ -22,12 +23,30 @@ const HomeDetail = () => {
 
 	const homeDetailBaseUrl = 'https://unilife-server.herokuapp.com/properties';
 
+	const homeDetailBoxGenerator = (
+		detailTitle: string,
+		IconName?: React.ElementType | null,
+		detailContent?: string | number
+	): ReactElement => {
+		return (
+			<Box sx={{ marginTop: '1.25rem' }}>
+				<Typography variant='body1' sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
+					{detailTitle}
+				</Typography>
+				<Box sx={{ display: 'flex', justifyContent: 'center', color: '#3A5295' }}>
+					{IconName && <IconName sx={{ marginRight: '0.3rem' }} />}
+					<Typography variant='body1' sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
+						{detailContent}
+					</Typography>
+				</Box>
+			</Box>
+		);
+	};
 	useEffect(() => {
-		const fetchHomeDetails = async () => {
+		const fetchHomeDetails = async (): Promise<void> => {
 			try {
 				const response = await axios.get(`${homeDetailBaseUrl}/${id}`);
 				setHomeDetails(response.data);
-				console.log(response.data);
 				setImageIndex(response.data.images.length - 1);
 				setBedroomsPrices(Object.values(response.data.bedroom_prices));
 			} catch (error) {
@@ -47,16 +66,7 @@ const HomeDetail = () => {
 							flexDirection: isMediumScreen ? 'column' : 'row',
 							alignItems: 'flex-start',
 						}}>
-						<Box
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-								alignItems: 'center',
-								width: isMediumScreen ? '100%' : '50%',
-								textAlign: 'center',
-								my: isMediumScreen ? '1rem' : '2rem',
-							}}>
+						<Box sx={styles.sliderContainerStyles(isMediumScreen)}>
 							<Button
 								variant='text'
 								sx={{ textTransform: 'capitalize', alignSelf: 'flex-start', my: '0.75rem' }}
@@ -94,30 +104,8 @@ const HomeDetail = () => {
 								})}
 							</Box>
 						</Box>
-						<Box
-							sx={{
-								display: 'flex',
-								flexDirection: 'column',
-								justifyContent: 'center',
-								alignItems: 'center',
-								width: isMediumScreen ? '90%' : '50%',
-								mx: isMediumScreen ? '1rem' : '2rem',
-								my: isMediumScreen ? '2rem' : '5rem',
-							}}>
-							<Box
-								sx={{
-									display: 'flex',
-									flexDirection: 'column',
-									justifyContent: 'center',
-									alignItems: 'center',
-									textAlign: 'center',
-									border: 'solid lightgray 0.1rem',
-									borderRadius: '0.5rem',
-									width: '100%',
-									py: '3rem',
-									px: '1rem',
-									my: '1rem',
-								}}>
+						<Box sx={styles.detailsContainerStyles(isMediumScreen)}>
+							<Box sx={styles.detailsWithoutButtonsContainerStyles()}>
 								<Box
 									sx={{
 										py: isMediumScreen ? '1rem' : '2rem',
@@ -135,111 +123,17 @@ const HomeDetail = () => {
 										justifyContent: 'space-between',
 										width: '100%',
 									}}>
-									<Box
-										sx={{
-											display: 'flex',
-											flexDirection: 'column',
-											justifyContent: 'space-between',
-											width: '100%',
-										}}>
-										<Box sx={{ marginTop: '1.25rem' }}>
-											<Typography
-												variant='body1'
-												sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-												Bedrooms
-											</Typography>
-											<Box sx={{ display: 'flex', justifyContent: 'center', color: '#3A5295' }}>
-												<Bed />
-												<Typography
-													variant='body1'
-													sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-													{homeDetails.bedroom_count}
-												</Typography>
-											</Box>
-										</Box>
-										<Box sx={{ marginTop: '1.25rem' }}>
-											<Typography
-												variant='body1'
-												sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-												Price
-											</Typography>
-											<Box sx={{ display: 'flex', justifyContent: 'center', color: '#3A5295' }}>
-												<Typography
-													variant='body1'
-													sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-													£ {homeDetails.rent}
-												</Typography>
-											</Box>
-										</Box>
+									<Box sx={styles.homeDetailColumnBoxStyles()}>
+										{homeDetailBoxGenerator('Bedroom', Bed, homeDetails.bedroom_count)}
+										{homeDetailBoxGenerator('Price', null, `£${homeDetails.rent}`)}
 									</Box>
-									<Box
-										sx={{
-											display: 'flex',
-											flexDirection: 'column',
-											justifyContent: 'space-between',
-											width: '100%',
-										}}>
-										<Box sx={{ marginTop: '1.25rem' }}>
-											<Typography
-												variant='body1'
-												sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-												Bathrooms
-											</Typography>
-											<Box sx={{ display: 'flex', justifyContent: 'center', color: '#3A5295' }}>
-												<Bathtub />
-												<Typography
-													variant='body1'
-													sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-													{homeDetails.bathroom_count}
-												</Typography>
-											</Box>
-										</Box>
-										<Box sx={{ marginTop: '1.25rem' }}>
-											<Typography
-												variant='body1'
-												sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-												Furnished Type
-											</Typography>
-											<Box sx={{ display: 'flex', justifyContent: 'center', color: '#3A5295' }}>
-												<Typography
-													variant='body1'
-													sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-													{homeDetails.furnished}
-												</Typography>
-											</Box>
-										</Box>
+									<Box sx={styles.homeDetailColumnBoxStyles()}>
+										{homeDetailBoxGenerator('Bathrooms', Bathtub, homeDetails.bathroom_count)}
+										{homeDetailBoxGenerator('Furnished Type', null, homeDetails.furnished)}
 									</Box>
-									<Box
-										sx={{
-											display: 'flex',
-											flexDirection: 'column',
-											justifyContent: 'space-between',
-											width: '100%',
-										}}>
-										<Box sx={{ marginTop: '1.25rem' }}>
-											<Typography
-												variant='body1'
-												sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-												Property Type
-											</Typography>
-											<Typography
-												variant='body1'
-												sx={{ color: '#3A5295', fontSize: isMediumScreen ? '0.85rem' : null }}>
-												{homeDetails.property_type}
-											</Typography>
-										</Box>
-										<Box sx={{ marginTop: '1.25rem' }}>
-											<Typography
-												variant='body1'
-												sx={{ fontSize: isMediumScreen ? '0.85rem' : null }}>
-												Available from
-											</Typography>
-											<Typography
-												variant='body1'
-												sx={{ color: '#3A5295', fontSize: isMediumScreen ? '0.85rem' : null }}>
-												{homeDetails.availability}
-											</Typography>
-										</Box>
+									<Box sx={styles.homeDetailColumnBoxStyles()}>
+										{homeDetailBoxGenerator('Property Type', null, homeDetails.property_type)}
+										{homeDetailBoxGenerator('Available from', null, homeDetails.availability)}
 									</Box>
 								</Box>
 							</Box>

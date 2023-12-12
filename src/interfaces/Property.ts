@@ -3,7 +3,7 @@ import { City } from './City';
 export interface Property {
 	address: Address;
 	availability: string;
-	bathroom_count?: number | undefined;
+	bathroom_count?: number | string | undefined;
 	bedroom_count?: number | undefined;
 	bedroom_prices?: BedroomPrices | undefined;
 	city_id?: City;

@@ -10,6 +10,7 @@ export const HomePageCityCardContainerStyles = (isSmallScreen: boolean) => ({
 	color: 'white',
 	boxShadow: '0.1rem 0 0.3rem 0.1rem rgba(0, 0, 0, 0.6)',
 	transition: '0.3s',
+	cursor: 'pointer',
 	':hover': {
 		boxShadow: '0.2rem 0 0.5rem 0.2rem rgba(0, 0, 0, 0.7)',
 	},

@@ -3,6 +3,7 @@ import { City } from '../../interfaces/City';
 import { useContext } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import * as styles from '../../styles/HomePageCityCardStyles';
+import { useNavigate } from 'react-router-dom';
 
 interface CityCardProps {
 	city: City;
@@ -10,6 +11,7 @@ interface CityCardProps {
 
 const HomePageCityCard = ({ city }: CityCardProps) => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
+	const navigate = useNavigate();
 
 	const imagePlaceHolderUrl: string =
 		'https://plus.unsplash.com/premium_photo-1679582754366-ae907574d052?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
@@ -20,7 +22,12 @@ const HomePageCityCard = ({ city }: CityCardProps) => {
 	};
 
 	return (
-		<Box sx={styles.HomePageCityCardContainerStyles(isSmallScreen)}>
+		<Box
+			sx={styles.HomePageCityCardContainerStyles(isSmallScreen)}
+			onClick={() => {
+				navigate(`/city/${city._id}`);
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+			}}>
 			<img
 				src={city.image_url}
 				alt={city.name}

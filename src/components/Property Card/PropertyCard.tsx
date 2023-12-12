@@ -1,8 +1,9 @@
 import { Box, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
-import { Bathtub, Bed, Home, Place } from '@mui/icons-material';
+import { Bathtub, Bed, FavoriteBorder, Home, Place } from '@mui/icons-material';
 import { useContext } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import { useNavigate } from 'react-router-dom';
+import { IconButtonUtils } from '../../utils/IconButtonUtils';
 
 const PropertyCard = ({ property }: any) => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
@@ -71,8 +72,18 @@ const PropertyCard = ({ property }: any) => {
 					</Box>
 				</Box>
 			</CardContent>
-			<CardActions sx={{ display: 'flex', justifyContent: 'center', padding: '0.2rem' }}>
+			<CardActions
+				sx={{
+					display: 'flex',
+					justifyContent: 'center',
+					padding: '0.2rem',
+				}}>
 				<IconButton
+					sx={{
+						':hover': {
+							backgroundColor: 'transparent',
+						},
+					}}
 					onClick={() => {
 						navigate(`/home/${property._id}`);
 						window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -80,6 +91,7 @@ const PropertyCard = ({ property }: any) => {
 					<Home />
 					<Typography>View Home</Typography>
 				</IconButton>
+				{IconButtonUtils.iconButtonGenerator(FavoriteBorder, 'Shortlist', 'gray', () => {})}
 			</CardActions>
 		</Card>
 	);

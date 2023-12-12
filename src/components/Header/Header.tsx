@@ -31,7 +31,12 @@ const Header = () => {
 			}}>
 			<Box>
 				<IconButton
-					sx={{ color: 'white' }}
+					sx={{
+						color: 'white',
+						':hover': {
+							backgroundColor: 'transparent',
+						},
+					}}
 					onClick={() => {
 						navigate('/');
 					}}>
@@ -43,8 +48,8 @@ const Header = () => {
 				<HamburgerMenu openForm={openForm} />
 			) : (
 				<Box sx={{ display: 'flex' }}>
-					{IconButtonUtils.iconButtonGenerator(FavoriteBorder, 'Shortlist', () => {})}
-					{IconButtonUtils.iconButtonGenerator(MailOutline, 'Contact Us', openForm)}
+					{IconButtonUtils.iconButtonGenerator(FavoriteBorder, 'Shortlist', 'white', () => {})}
+					{IconButtonUtils.iconButtonGenerator(MailOutline, 'Contact Us', 'white', openForm)}
 				</Box>
 			)}
 

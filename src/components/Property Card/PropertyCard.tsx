@@ -1,12 +1,14 @@
 import { Box, Card, CardActions, CardContent, CardMedia, IconButton, Typography } from '@mui/material';
-import { Bathtub, Bed, FavoriteBorder, Home, Place } from '@mui/icons-material';
+import { Bathtub, Bed, Favorite, FavoriteBorder, Home, Place } from '@mui/icons-material';
 import { useContext } from 'react';
 import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import { useNavigate } from 'react-router-dom';
 import { IconButtonUtils } from '../../utils/IconButtonUtils';
+import { ShortlistedHomesContext } from '../../contexts/ShortlistContextProvider';
 
 const PropertyCard = ({ property }: any) => {
 	const { isSmallScreen } = useContext(MediaQueryContext);
+	const { shortlistedHomesIds, handleShortlistedHomes } = useContext(ShortlistedHomesContext);
 	const navigate = useNavigate();
 
 	const boxStyling = {
@@ -91,7 +93,12 @@ const PropertyCard = ({ property }: any) => {
 					<Home />
 					<Typography>View Home</Typography>
 				</IconButton>
-				{IconButtonUtils.iconButtonGenerator(FavoriteBorder, 'Shortlist', 'gray', () => {})}
+				{IconButtonUtils.iconButtonGenerator(
+					shortlistedHomesIds.includes(property._id) ? Favorite : FavoriteBorder,
+					shortlistedHomesIds.includes(property._id) ? 'Shortlisted' : 'Shortlist',
+					shortlistedHomesIds.includes(property._id) ? 'red' : 'gray',
+					() => handleShortlistedHomes(property._id)
+				)}
 			</CardActions>
 		</Card>
 	);

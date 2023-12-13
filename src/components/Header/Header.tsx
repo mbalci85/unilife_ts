@@ -48,7 +48,9 @@ const Header = () => {
 				<HamburgerMenu openForm={openForm} />
 			) : (
 				<Box sx={{ display: 'flex' }}>
-					{IconButtonUtils.iconButtonGenerator(FavoriteBorder, 'Shortlist', 'white', () => {})}
+					{IconButtonUtils.iconButtonGenerator(FavoriteBorder, 'Shortlist', 'white', () => {
+						navigate('/favorites');
+					})}
 					{IconButtonUtils.iconButtonGenerator(MailOutline, 'Contact Us', 'white', openForm)}
 				</Box>
 			)}

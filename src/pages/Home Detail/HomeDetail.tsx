@@ -4,13 +4,15 @@ import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Property } from '../../interfaces/Property';
-import { Bathtub, Bed, CheckCircleOutlined, ChevronLeft, FavoriteBorderOutlined } from '@mui/icons-material';
+import { Bathtub, Bed, CheckCircleOutlined, ChevronLeft, Favorite, FavoriteBorderOutlined } from '@mui/icons-material';
 import BookViewing from '../../components/forms/BookViewing';
 import * as styles from '../../styles/HomeDetailPageStyles';
 import { HomeDetailPageUtils } from '../../utils/HomeDetailPageUtils';
+import { ShortlistedHomesContext } from '../../contexts/ShortlistContextProvider';
 
 const HomeDetail = () => {
 	const { isVerySmallScreen, isMediumScreen, isSmallScreen } = useContext(MediaQueryContext);
+	const { shortlistedHomesIds, handleShortlistedHomes } = useContext(ShortlistedHomesContext);
 	const { id } = useParams();
 	const navigate = useNavigate();
 
@@ -152,22 +154,34 @@ const HomeDetail = () => {
 
 							<Box>
 								<Button
-									startIcon={<FavoriteBorderOutlined />}
+									startIcon={
+										shortlistedHomesIds.includes(homeDetails._id) ? (
+											<Favorite sx={{ color: 'red' }} />
+										) : (
+											<FavoriteBorderOutlined />
+										)
+									}
 									variant='outlined'
 									size={isMediumScreen ? 'small' : 'medium'}
 									sx={{
 										marginRight: '0.75rem',
+										textTransform: 'capitalize',
+										color: shortlistedHomesIds.includes(homeDetails._id) ? 'red' : null,
 										':hover': {
-											backgroundColor: '#3A5295',
-											color: '#FFFF',
+											backgroundColor: shortlistedHomesIds.includes(homeDetails._id)
+												? '#FFFF'
+												: '#3A5295',
+											color: shortlistedHomesIds.includes(homeDetails._id) ? 'red' : '#FFFF',
 										},
-									}}>
-									Shortlist
+									}}
+									onClick={() => handleShortlistedHomes(homeDetails._id)}>
+									{shortlistedHomesIds.includes(homeDetails._id) ? 'Shortlisted' : 'Shortlist'}
 								</Button>
 								<Button
 									variant='outlined'
 									size={isMediumScreen ? 'small' : 'medium'}
 									sx={{
+										textTransform: 'capitalize',
 										':hover': {
 											backgroundColor: '#3A5295',
 											color: '#FFFF',

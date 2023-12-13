@@ -32,8 +32,8 @@ const PropertyCard = ({ property }: any) => {
 		<Card
 			sx={{
 				height: '25rem',
-				width: isSmallScreen ? '80vw' : '23rem',
-				margin: '2rem',
+				width: isSmallScreen ? '80vw' : '21rem',
+				margin: '2rem 1rem',
 			}}>
 			<CardMedia sx={{ height: '12rem' }} image={property.images[0]} title={property.property_description} />
 			<CardContent sx={{ width: '100%', padding: 0 }}>

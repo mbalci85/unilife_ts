@@ -4,7 +4,15 @@ import { MediaQueryContext } from '../../contexts/MediaQueryContextProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Property } from '../../interfaces/Property';
-import { Bathtub, Bed, CheckCircleOutlined, ChevronLeft, Favorite, FavoriteBorderOutlined } from '@mui/icons-material';
+import {
+	Bathtub,
+	Bed,
+	CheckCircleOutlined,
+	ChevronLeft,
+	ChevronRight,
+	Favorite,
+	FavoriteBorderOutlined,
+} from '@mui/icons-material';
 import BookViewing from '../../components/forms/BookViewing';
 import * as styles from '../../styles/HomeDetailPageStyles';
 import { HomeDetailPageUtils } from '../../utils/HomeDetailPageUtils';
@@ -53,18 +61,39 @@ const HomeDetail = () => {
 						<Box sx={styles.sliderContainerStyles(isMediumScreen)}>
 							<Button
 								variant='text'
-								sx={{ textTransform: 'capitalize', alignSelf: 'flex-start', my: '0.75rem' }}
+								sx={{
+									textTransform: 'capitalize',
+									alignSelf: 'flex-start',
+									my: '0.75rem',
+									':hover': { backgroundColor: 'transparent' },
+								}}
 								startIcon={<ChevronLeft />}
 								onClick={() => {
 									navigate(`/city/${homeDetails.city_id?._id}`);
 								}}>
 								Back to Search
 							</Button>
-							<Box>
+							<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+								<ChevronLeft
+									fontSize='large'
+									sx={{ color: '#3A5295', cursor: 'pointer' }}
+									onClick={() => {
+										setImageIndex(imgIndex - 1 >= 0 ? imgIndex - 1 : imgIndex);
+									}}
+								/>
 								<img
 									src={homeDetails.images[imgIndex]}
 									alt='main_img'
 									style={{ width: '90%', borderRadius: '0.75rem' }}
+								/>
+								<ChevronRight
+									fontSize='large'
+									sx={{ color: '#3A5295', cursor: 'pointer' }}
+									onClick={() => {
+										setImageIndex(
+											imgIndex + 1 <= homeDetails.images.length - 1 ? imgIndex + 1 : imgIndex
+										);
+									}}
 								/>
 							</Box>
 							<Box>
@@ -169,7 +198,7 @@ const HomeDetail = () => {
 										color: shortlistedHomesIds.includes(homeDetails._id) ? 'red' : null,
 										':hover': {
 											backgroundColor: shortlistedHomesIds.includes(homeDetails._id)
-												? '#FFFF'
+												? 'lightgray'
 												: '#3A5295',
 											color: shortlistedHomesIds.includes(homeDetails._id) ? 'red' : '#FFFF',
 										},

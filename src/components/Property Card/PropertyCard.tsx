@@ -34,6 +34,10 @@ const PropertyCard = ({ property }: any) => {
 				height: '25rem',
 				width: isSmallScreen ? '80vw' : '21rem',
 				margin: '2rem 1rem',
+				transition: '0.3s',
+				':hover': {
+					boxShadow: '0 0 0.5rem 0.2rem rgba(0, 0, 0, 0.3)',
+				},
 			}}>
 			<CardMedia sx={{ height: '12rem' }} image={property.images[0]} title={property.property_description} />
 			<CardContent sx={{ width: '100%', padding: 0 }}>
@@ -84,6 +88,8 @@ const PropertyCard = ({ property }: any) => {
 					sx={{
 						':hover': {
 							backgroundColor: 'transparent',
+							color: 'rgba(58, 82, 149, 1)',
+							transform: 'rotate(-2deg)',
 						},
 					}}
 					onClick={() => {
@@ -97,7 +103,8 @@ const PropertyCard = ({ property }: any) => {
 					shortlistedHomesIds.includes(property._id) ? Favorite : FavoriteBorder,
 					shortlistedHomesIds.includes(property._id) ? 'Shortlisted' : 'Shortlist',
 					shortlistedHomesIds.includes(property._id) ? 'red' : 'gray',
-					() => handleShortlistedHomes(property._id)
+					() => handleShortlistedHomes(property._id),
+					shortlistedHomesIds.includes(property._id) ? 'Deselect' : 'Shortlist'
 				)}
 			</CardActions>
 		</Card>

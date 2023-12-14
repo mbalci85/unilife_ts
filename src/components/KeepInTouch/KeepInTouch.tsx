@@ -57,9 +57,9 @@ const KeepInTouch = () => {
 			</Box>
 			<Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
 				<Typography variant='h6'>Let's Socialize</Typography>
-				{IconButtonUtils.iconButtonGenerator(Facebook, 'Facebook', 'white', () => {})}
-				{IconButtonUtils.iconButtonGenerator(Twitter, 'Twitter', 'white', () => {})}
-				{IconButtonUtils.iconButtonGenerator(Instagram, 'Instagram', 'white', () => {})}
+				{IconButtonUtils.iconButtonGenerator(Facebook, 'Facebook', 'white', () => {}, '')}
+				{IconButtonUtils.iconButtonGenerator(Twitter, 'Twitter', 'white', () => {}, '')}
+				{IconButtonUtils.iconButtonGenerator(Instagram, 'Instagram', 'white', () => {}, '')}
 			</Box>
 		</Box>
 	);

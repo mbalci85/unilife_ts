@@ -79,7 +79,7 @@ const Header = () => {
 						</IconButton>
 					</Box>
 
-					{IconButtonUtils.iconButtonGenerator(MailOutline, 'Contact Us', 'white', openForm)}
+					{IconButtonUtils.iconButtonGenerator(MailOutline, 'Contact Us', 'white', openForm, '')}
 				</Box>
 			)}
 
